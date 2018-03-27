@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/com.adobe.trainning.core.core.component.HandleClaim">
+    <OCD id="com.adobe.trainning.core.core.component.HandleClaim" name="%com.adobe.trainning.core.core.component.HandleClaim.name" description="%com.adobe.trainning.core.core.component.HandleClaim.description"/>
+    <Designate pid="com.adobe.trainning.core.core.component.HandleClaim">
+        <Object ocdref="com.adobe.trainning.core.core.component.HandleClaim"/>
+    </Designate>
+</metatype:MetaData>

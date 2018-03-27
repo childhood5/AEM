@@ -1,0 +1,2285 @@
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2013 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+#ContentWrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+
+    background: url(core/css/resources/content-bg-texture.png);
+}
+
+#ContentFrame {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+
+    border-right: #d0d0d0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.hide-nosize, .hide-nosize * {
+    /*height: 0 !important;*/
+    /*width: 0 !important;*/
+    z-index: -1 !important;
+}
+
+#InlineEditingUI {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 601;
+    pointer-events: none;
+    display: none;
+}
+
+#InlineEditingUI .cq-RichText-ui,
+#InlineEditingUI .cq-imageeditor-ui {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#InlineEditingUI .cq-imageeditor-ui {
+    pointer-events: auto;
+}
+
+#FullScreenWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1100;
+    background-color: #454545;
+    overflow: hidden;
+}
+
+#FullScreenWrapper .coral-RichText-editorWrapper {
+    width: 100%;
+    background-color: #eeeeee;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    cursor: text;
+}
+
+#FullScreenWrapper .coral-RichText-editorWrapper .coral-RichText-editor {
+    padding: 0.75rem;
+}
+
+#FullScreenWrapper .coral-RichText-editorWrapper .is-edited {
+    background-color: #eeeeee;
+}
+
+#FullScreenWrapper .coral-RichText-editorWrapper .coral-RichText-editor .richtext-tableselection {
+    background-color: #3287d2;
+}
+
+#FullScreenWrapper .coral-RichText-editorWrapper .coral-RichText-sourceEditor {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border: 0 none;
+    outline: none;
+}
+
+#FullScreenMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+/*! editable overlay */
+
+div.cq-draggable.cq-dragorigin { /* origin which was dragged */
+    background: rgba(255, 255, 255, 0.6);
+    outline: none !important;
+    -webkit-touch-callout: none;
+}
+
+div.cq-droptarget.cq-dragover {
+    overflow: visible;
+}
+
+/* wrapper */
+#OverlayWrapper {
+    /*position: absolute;*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    z-index: 900;
+    background-color: rgba(255,0,0,0); /* fixes overlays issues on IE9 */
+}
+
+#OverlayWrapper.is-hidden {
+    display: none;
+}
+
+#OverlayWrapper.is-hidden-children > .cq-Overlay {
+    display: none;
+}
+
+/* basic overlay */
+.cq-Overlay {
+    position: absolute;
+    line-height: 2.875rem;
+    color: #DDDDDD;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.cq-Overlay:focus {
+    outline: 0;
+}
+
+.cq-Overlay.is-bordered,
+.cq-Overlay.is-active,
+.cq-Overlay.is-hover,
+.cq-Overlay.is-selected {
+    border: solid 0.125rem;
+    margin: -0.125rem;
+}
+
+.cq-Overlay.is-active,
+.cq-Overlay.is-hover,
+.cq-Overlay.is-selected {
+    color: #2583D8;
+    border-color:  #2583D8;
+}
+
+.cq-Overlay.is-disabled {
+    border-width: 0;
+}
+
+.cq-Overlay.is-hidden {
+    display: none;
+}
+
+/* placeholder overlay */
+.cq-Overlay--placeholder {
+    color: rgba(0,0,0,.3);
+    border-color:  rgba(0,0,0,.3);
+    background-color: rgba(255,255,255,.25);
+    border-style: solid;
+    border-width: 0.125rem;
+    margin: -0.125rem;
+}
+
+.cq-Overlay--placeholder.is-active,
+.cq-Overlay--placeholder.is-hover,
+.cq-Overlay--placeholder.is-selected {
+    background-color: rgba(255,255,255,.55);
+}
+
+.cq-Overlay--placeholder:before {
+    content: attr(data-text);
+    color: inherit;
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 2px;
+}
+
+.cq-Overlay.cq-Overlay--placeholder.is-disabled {
+    border-width: 0.125rem;
+}
+
+.cq-Overlay.cq-Overlay--placeholder.is-disabled.is-hover {
+    color: #DDDDDD;
+    border-color: #DDDDDD;
+}
+
+/* sub droptarget */
+.cq-Overlay-subdroptarget {
+    position: absolute;
+}
+
+.cq-Overlay-subdroptarget.cq-dragover {
+    background: #3287D2;
+}
+
+/* Drag and Drop handling */
+
+.cq-Overlay--component.cq-Overlay--insertBefore,
+.cq-Overlay--component.cq-Overlay--insertAfter {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+    z-index: 101 !important; /* to make sure the insert arrows on top */
+}
+
+.cq-Overlay--component.cq-Overlay--insertBefore {
+    box-shadow: inset 0 0.0625rem 0 0 #fff;
+    border-bottom-width: 0;
+    border-top-color:  #2583D8;
+    border-top-width: 0.125rem;
+    margin-top: -0.125rem;
+
+}
+
+.cq-Overlay--component.cq-Overlay--insertAfter {
+    box-shadow: inset 0 -0.0625rem 0 0 #fff;
+    border-bottom-color:  #2583D8;
+    border-bottom-width: 0.125rem;
+    border-top-width: 0;
+    margin-bottom: -0.125rem;
+}
+
+.cq-Overlay--component.cq-Overlay--insertBefore:after,
+.cq-Overlay--component.cq-Overlay--insertAfter:after {
+    position: absolute;
+    left: 50%;
+    margin-left: -1.375rem;
+    line-height: 22px; /*rem issue with pseudo-elements on IE (CQ-18732)*/
+    text-align: center;
+    background: #2583D8;
+    color: #FFFFFF;
+    height: 1.375rem;
+    width: 2.75rem;
+}
+
+.cq-Overlay--component.cq-Overlay--insertBefore:after {
+    top: -1.5rem;
+    content: "\25B2";
+    border-radius: 1.375rem 1.375rem 0 0;
+}
+
+.cq-Overlay--component.cq-Overlay--insertAfter:after {
+    bottom: -1.5rem;
+    content: "\25BC";
+    border-radius: 0 0 1.375rem 1.375rem;
+}
+
+.cq-Overlay--component.cq-Overlay--placeholder.cq-Overlay--insertBefore,
+.cq-Overlay--component.cq-Overlay--placeholder.cq-Overlay--insertAfter {
+    border-left-width: 0.125rem;
+    border-right-width: 0.125rem;
+}
+
+.cq-Overlay--component.cq-Overlay--placeholder.cq-Overlay--insertBefore {
+    border-bottom-width: 0.125rem;
+}
+
+.cq-Overlay--component.cq-Overlay--placeholder.cq-Overlay--insertAfter {
+    border-top-width: 0.125rem;
+}
+
+/* nesting max. 7 levels */
+.cq-Overlay:before {
+    z-index: 5;
+}
+
+.cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 9;
+}
+
+.cq-Overlay > .cq-Overlay {
+    z-index: 10;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 19;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay {
+    z-index: 20;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 29;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay {
+    z-index: 30;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 39;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay {
+    z-index: 40;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 49;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay {
+    z-index: 50;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 59;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay {
+    z-index: 60;
+}
+
+.cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay > .cq-Overlay-subdroptarget {
+    z-index: 69;
+}
+
+
+
+/*! editable toolbar */
+#EditableToolbar {
+    display: none;
+    position: absolute;
+    top: 3.125rem;
+    left: 0;
+    z-index: 600;
+    box-shadow: 0rem 0.1875rem 0.3125rem 0rem rgba(0, 0, 0, 0.3);
+    background: #454545;
+}
+
+#EditableToolbar > button {
+    height: 2.75rem;
+    min-width: 3.75rem;
+    color: #ffffff;
+}
+
+#EditableToolbar > button > .coral-Icon,
+#EditableToolbar > button > .cq-EditableToolbar-text {
+    opacity: 0.6;
+}
+
+#EditableToolbar > button:hover > .coral-Icon,
+#EditableToolbar > button:hover > .cq-EditableToolbar-text {
+    opacity: 1;
+}
+
+#EditableToolbar > :active,
+#EditableToolbar > .is-active {
+    color: #2583D8;
+    opacity: 1;
+}
+
+#EditableToolbar > button > .cq-EditableToolbar-text {
+    font-size: 13px;
+}
+
+.cq-EditableToolbar-text--left {
+    margin-right: 5px;
+}
+
+.cq-EditableToolbar-text--right {
+    margin-left: 5px;
+}
+
+#EditableToolbar > button.cq-EditableToolbar-button.cq-EditableToolbar-button--readOnly {
+    pointer-events: none;
+}
+
+#EditableToolbar > button.cq-EditableToolbar-button.cq-EditableToolbar-button--readOnly > .coral-Icon,
+#EditableToolbar > button.cq-EditableToolbar-button.cq-EditableToolbar-button--readOnly > .cq-EditableToolbar-text {
+    opacity: 1;
+}
+
+
+/* editable toolbar 'select parent' popover */
+.cq-select-parent {
+    position: absolute;
+    width: 15.625rem;
+    padding: 0;
+}
+
+.cq-select-parent-list {
+    margin: 0;
+}
+
+.cq-select-parent-item {
+    line-height: 2.5rem;
+    height: 2.5rem;
+}
+
+.cq-select-parent-item + .cq-select-parent-item {
+    border-top: 0.0625rem solid rgba(200,200,200,100);
+}
+
+.cq-select-parent-item  {
+    position: relative;
+    padding-left: 2.5rem;
+    padding-right: 0.9375rem;
+}
+
+.cq-select-parent-item.selected {
+    background-color: #2583D8;
+    color: white;
+}
+
+.cq-select-parent-item:hover {
+    background-color: #2583D8;
+    color: white;
+    cursor: pointer;
+}
+
+.cq-select-parent-color-hint {
+    display: inline-block;
+    position: relative;
+    top: 0.5rem;
+    margin-right: 0.9375rem;
+    margin-left: 0.9375rem;
+    width: 1.5625rem;
+    height: 1.25rem;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.8);
+}
+
+/* inline editor selector "custom" style */
+.inlineeditor-selector.coral-Popover {
+    background: #454545;
+    text-align: left;
+    border: none;
+}
+
+.inlineeditor-selector-list {
+    list-style-type: none;
+    background: #454545;
+}
+
+.inlineeditor-selector-list-item {
+    display: block;
+    padding: .625rem;
+    text-decoration: none;
+    text-align: left;
+    background: #454545;
+}
+
+.inlineeditor-selector-list-item:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.inlineeditor-is-hover-subtarget {
+    background: rgb(50, 135, 210);
+    opacity: 0.5;
+}
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2013 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+.editor-panel {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+
+    background: #EEEEEE;
+
+    -moz-transition: -moz-transform 1.2s;
+    -webkit-transition: -webkit-transform 1.2s;
+    -ms-transition: -ms-transform 1.2s;
+    transition: transform 1.2s;
+}
+
+.editor-panel-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 0.0625rem;
+    overflow: scroll;
+    z-index: 800;
+
+    /* improves scrolling perf */
+    -webkit-overflow-scrolling: touch;
+}
+
+.editor-panel-content-with-header {
+    top: 2.75rem;
+}
+
+/*! editor-panel-header toolbar */
+
+.editor-panel-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+}
+/**************************************
+* SidePanel
+**************************************/
+.sidepanel-opened {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: #eeeeee;
+}
+
+.sidepanel-opened .sidepanel-content {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.sidepanel-closed.sidepanel-resizing {
+    display: none;
+}
+
+/**************************************
+* SidePanel for Mobile
+**************************************/
+@media screen and (max-width: 1024px) {
+    /* Fullscreen */
+    .sidepanel {
+        width: 100%;
+
+        -webkit-transition: -webkit-transform 1.2s;
+        transition: transform 1.2s;
+    }
+
+    .sidepanel-sliding {
+        display: none;
+    }
+
+    /* Shift on the left */
+    .sidepanel-closed {
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    /* Unshift it */
+    .sidepanel-opened {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    /* No split screen => no resizer */
+    /*todo by default, dont display it*/
+    .sidepanel-opened .sidepanel-resizer {
+        display: none;
+    }
+
+    /* Header */
+    .sidepanel-header {
+        height: 2.75rem;
+    }
+
+    .sidepanel-header .header-action {
+        color: #ffffff !important;
+        opacity: 0.9 !important;
+        line-height: 2.75rem;
+        height: 2.75rem;
+        width: 2.75rem;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+        outline: none;
+        float: right;
+    }
+
+    .sidepanel-header .header-action .coral-Icon {
+        color: #ffffff !important;
+        opacity: 0.9 !important;
+    }
+
+    .sidepanel-header .sidepanel-header-title {
+        position: absolute;
+        color: #e6e6e6;
+        line-height: 2.75rem;
+        height: 2.75rem;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        font-size: 1.25rem;
+        font-weight: lighter;
+        width: 100%;
+    }
+
+    /* Hide the desktop toggle */
+    .sidepanel-content .toggle-sidepanel {
+        display: none;
+    }
+
+    .sidepanel-content .coral-TabPanel .coral-TabPanel-content {
+        display: table-cell;
+    }
+
+    .sidepanel-content .filter-panel {
+        width: 18rem;
+        left: 0;
+        float: left;
+        padding-right: 1rem;
+    }
+
+    .sidepanel-content .sidepanel-tab-title {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .sidepanel-content .filter-panel .componentfilter label {
+        line-height: 2.25rem;
+    }
+
+    .sidepanel-content .selected-filter-panel {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        height: 2.625rem;
+        padding-left: 1rem;
+
+        border-left: 0.0625rem solid rgba(0, 0, 0, 0.15);
+    }
+
+    .sidepanel-content .js-SidePanel-content .selected-filter-panel .taglist {
+        margin-top: 0;
+    }
+
+    .sidepanel-content .js-SidePanel-content .selected-filter-panel .taglist li {
+        margin-top: 0;
+    }
+
+    .sidepanel-content .js-SidePanel-content .selected-filter-panel .taglist-clearall {
+        padding-top: 0.45rem;
+        padding-left: 0.5rem;
+    }
+
+    .sidepanel-content .content-panel {
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+        padding-left: 1rem;
+        border-left: 1px solid #e1e1e1;
+    }
+}
+
+/**************************************
+* SidePanel for Desktop
+**************************************/
+@media screen and (min-width: 1025px) {
+    /* Split screen */
+    .sidepanel {
+        -moz-transition: opacity 0.5s;
+        -webkit-transition: opacity 0.5s;
+        transition: opacity 0.5s;
+    }
+
+    /* No header on desktop */
+    .sidepanel .sidepanel-header {
+        display: none;
+    }
+
+    .sidepanel .content-panel {
+        padding-top: 1rem;
+    }
+
+    .sidepanel-content .js-SidePanel-empty {
+        position: relative;
+        top: 2.6875rem;
+        height: 100%;
+        border-width: 0.0625rem;
+        border-color: rgba(0, 0, 0, 0.15);
+        border-style: solid solid none none;
+    }
+
+    /* Opened */
+    .sidepanel-opened {
+        min-width: 25%;
+        max-width: 97.5%;
+        width: 25%; /* default width */
+    }
+
+    /* Closed, underneath the Content panel */
+    .sidepanel-closed {
+        width: 0;
+        z-index: 0;
+        opacity: 0;
+    }
+
+    .sidepanel-closed .sidepanel-content {
+        opacity: 0;
+    }
+
+    .sidepanel-opened .sidepanel-content {
+        opacity: 1;
+    }
+
+    .sidepanel-content .sidepanel-tab-title {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: .0625rem solid #e1e1e1;
+    }
+
+    /* Resizer */
+    .sidepanel-resizer {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -1rem;
+        height: 100%;
+        width: 1rem;
+        background: rgba(238, 238, 238, 0);
+        cursor: col-resize;
+        z-index: 901;
+    }
+
+    .sidepanel-resizer.is-dragging {
+        background: rgba(238, 238, 238, 0.7);
+    }
+
+    /* Content panel */
+    #Content {
+        -webkit-transition: left 0.5s, width 0.5s;
+        -moz-transition: left 0.5s, width 0.5s;
+        transition: left 0.5s, width 0.5s;
+    }
+
+    /* SidePanel opened => Content panel in split screen */
+    .sidepanel-opened ~ #Content {
+        left: 25%;
+        width: 75%;
+    }
+
+    .sidepanel-content .js-SidePanel-content .selected-filter-panel .taglist-clearall {
+        margin: 0.625rem 0 0 0.5rem;
+    }
+
+    /**************************************
+    * SidePanel content
+    **************************************/
+    .sidepanel .content-panel {
+        left: 0.875rem;
+        right: 0.875rem;
+        margin: 0;
+    }
+}
+
+/**************************************
+* SidePanel Tabs
+**************************************/
+
+.sidepanel-content .coral-TabPanel--stacked {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sidepanel-content .coral-TabPanel--stacked .coral-TabPanel-navigation {
+    height: 100%;
+    background-color: #FAFAFA;
+    width: 3.5rem;
+}
+
+.sidepanel-content .coral-TabPanel .coral-TabPanel-tab--icon {
+    height: 39px;
+    min-width: 0;
+    width: 26px;
+
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    padding-left: 14px;
+
+    border-left: 3px solid transparent;
+    border-right: 0;
+
+    text-align: center;
+}
+
+.sidepanel-content .coral-TabPanel .coral-TabPanel-tab--icon:hover {
+    color: #1e5fbe;
+}
+
+.sidepanel-content .coral-TabPanel .coral-TabPanel-tab--icon .coral-Icon {
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.sidepanel-content .coral-TabPanel .coral-TabPanel-tab--icon.is-active {
+    border-left: 3px solid #326ec8;
+}
+
+
+.sidepanel-content .coral-TabPanel .coral-TabPanel-pane {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/**************************************
+* SidePanel content
+**************************************/
+
+.sidepanel .coral-TabPanel .coral-TabPanel-content {
+    padding: 0;
+    border-left: 1px solid #E1E1E1;
+    border-right: 1px solid #E1E1E1;
+}
+
+.sidepanel-content .sidepanel-tab-title {
+    display: block;
+    font-size: 15px;
+    color: #707070;
+    margin-bottom: 1rem;
+    border-bottom: .0625rem solid #e1e1e1;
+}
+
+/**************************************
+* Compatibility with old panels  (temp)
+**************************************/
+.editor-panel-ignore {
+    display: none
+}
+
+/**************************************
+* SidePanel filter
+**************************************/
+
+.sidepanel .filter-panel .coral-DecoratedTextfield {
+    width: 100%;
+}
+
+.sidepanel .filter-panel .coral-Autocomplete {
+    width: 100%;
+}
+
+.sidepanel .filter-panel .coral-PathBrowser {
+    width: 100%;
+}
+
+.sidepanel .filter-panel .coral-Form-field {
+    margin-bottom: 0;
+    margin-top: 0.4375rem;
+}
+
+.sidepanel .filter-panel .coral-Form-fieldwrapper:first-child .coral-Form-field {
+    margin-top: 0;
+}
+
+.sidepanel-opened .js-SidePanel-content .selected-filter-panel {
+    display: inline-block;
+    border: 0;
+}
+
+/* distribute the content */
+.sidepanel .filter-panel .search input[type=text] {
+    padding-right: 3.5rem !important;
+}
+
+/**************************************
+* SidePanel content
+**************************************/
+.sidepanel .content-panel {
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidepanel .content-panel .grid {
+    padding: 0rem;
+}
+
+.sidepanel .content-panel .grid a.label {
+    text-decoration: inherit !important;
+    color: inherit !important;
+}
+
+/* No results */
+.sidepanel .content-panel > .emptyresult {
+    display: none;
+    width: 100%;
+    padding-top: 3rem;
+    color: #525252;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.sidepanel .content-panel > .emptyresult > span {
+    display: block;
+}
+
+.sidepanel .content-panel > .emptyresult .noresults {
+    font-size: 1.5625rem;
+}
+
+.sidepanel .content-panel > .emptyresult .retry {
+    font-size: 1.125rem;
+    padding-top: 0.5rem;
+}
+
+.sidepanel .sidepanel-content-with-header {
+    background-color: #FAFAFA;
+}
+.editor-EmulatorBar {
+    display: none;
+
+    border-bottom: 1px solid #d7d7d7;
+    width: 100%;
+
+    background-color: #f5f5f5;
+}
+
+.editor-EmulatorBar.is-visible {
+    display: block;
+}
+
+.editor-EmulatorBar-toolbar {
+    height: 48px;
+    position: relative;
+}
+
+.editor-EmulatorBar-toolbar-actions {
+    height: 48px;
+
+    line-height: 48px;
+
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    z-index: 1; /* place over the device switcher */
+
+    border-right: 1px solid #d7d7d7;
+    background-color: #ebebeb; /* to overlay the devices */
+}
+
+.editor-EmulatorBar-toolbar-actions > button {
+    width: 44px;
+}
+
+.editor-EmulatorBar-toolbar-actions > button .coral-Icon {
+    line-height: 48px;
+}
+
+/* device popover */
+.editor-EmulatorDevicePopoverTrigger {
+
+}
+
+.editor-EmulatorDevicePopover {
+
+
+}
+
+.editor-EmulatorDeviceList-device {
+    width: 100%;
+    text-align: left;
+}
+
+/* switcher */
+.editor-EmulatorBar-switcher {
+    height: 48px;
+    width: 100%;
+
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+
+    display: none;
+}
+
+.editor-EmulatorBar-switcher.is-visible {
+    display: block;
+}
+
+.editor-EmulatorBar-switcher-device {
+    border-right: 1px solid #d0d0d0;
+    height: 48px;
+    padding: 0 12px;
+
+    display: inline-block;
+    vertical-align: middle;
+
+    line-height: 48px;
+    text-align: right;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    color: #969696;
+}
+
+.editor-EmulatorBar-switcher-device--desktop {
+    position: absolute;
+    right: 0;
+}
+
+.editor-EmulatorBar-switcher-device:hover {
+    color: #4b4b4b;
+}
+
+.editor-EmulatorBar-switcher-device-text {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 12px;
+}
+
+.editor-EmulatorBar-switcher-currentDevice {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ruler */
+.editor-EmulatorBar-ruler {
+    border-top: 1px solid #d0d0d0;
+    height: 18px;
+
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.editor-EmulatorBar-ruler-block {
+    border-right: 1px solid #d0d0d0;
+    height: 18px;
+    width: 49px;
+
+    position: relative;
+    display: inline-block;
+}
+
+.editor-EmulatorBar-ruler-block::before {
+    position: absolute;
+    left: 3px;
+
+    content: attr(data-display);
+    font-size: 10px;
+    line-height: 18px;
+
+    color: #969696;
+}
+
+.editor-EmulatorBar-ruler-line {
+    margin-top: 15px;
+    margin-left: 4px;
+    height: 3px;
+    width: 1px;
+
+    display: inline-block;
+
+    background-color: #d0d0d0;
+}
+
+.editor-EmulatorBar-ruler-line:nth-child(2n) {
+    margin-top: 14px;
+    height: 4px;
+}
+
+/* badge */
+.editor-EmulatorBadge {
+    font-size: 13px;
+}
+
+.editor-EmulatorBadge-icon {
+    padding-left: 10px;
+}
+
+/* breakpoint */
+.editor-EmulatorBar-breakpoint {
+    position: absolute;
+    z-index: 2; /* @override coral */
+    padding: 2px 8px; /* @override coral */
+    min-height: 0; /* @override coral */
+}
+
+/* vertical line for current break */
+.editor-EmulatorBar-toolbar-currentWidth {
+    margin-left: -1px;
+    width: 1px;
+
+    position: absolute;
+    top: 0;
+    left: 100%;
+    bottom: -19px;
+
+    pointer-events: none;
+
+    background-color: #d0d0d0;
+}
+
+.editor-EmulatorBar-toolbar-currentHeight {
+    border-bottom: 2px dashed rgb(50, 110, 200);
+
+    position: absolute;
+    left: 0;
+
+    pointer-events: none;
+}
+.editor-GlobalBar {
+    background-color: #4b4b4b;
+
+    /* Always has a drop shadow: CQ-30861 */
+    -webkit-box-shadow: 0rem 0.0625rem 0.0625rem 0rem rgba(0, 0, 0, 0.4);
+    box-shadow:         0rem 0.0625rem 0.0625rem 0rem rgba(0, 0, 0, 0.4);
+}
+
+.coral-GlobalBar-main::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.editor-GlobalBar-pageTitle {
+    width: 100%;
+
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 44px;
+
+    position: absolute;
+    z-index: -1;
+
+    color: rgb(160, 160, 160);
+}
+
+.editor-GlobalBar-item {
+    border: 1px solid;
+    height: 44px;
+    min-width: 44px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+    vertical-align: top;
+    outline: none;
+    float: left;
+    line-height: 44px;
+
+    display: inline-block;
+
+    border-color: transparent;
+    color: rgb(160, 160, 160);
+    opacity: 0.9;
+}
+
+.editor-GlobalBar-item.is-selected {
+    color: rgb(255, 255, 255);
+    opacity: 0.9;
+}
+
+.editor-GlobalBar-item:hover {
+    color: rgb(255, 255, 255);
+    opacity: 1.0;
+}
+
+.editor-GlobalBar-item[disabled],
+.editor-GlobalBar-item.is-disabled {
+    display: none;
+}
+
+.editor-GlobalBar-item.editor-GlobalBar-item--badge {
+    margin: 0 10px;
+    height: 24px;
+    min-width: 0;
+    width: 24px;
+    padding: 0;
+
+    text-align: center;
+    line-height: 1;
+}
+
+/* @override */
+.editor-GlobalBar-item > .coral-Icon,
+.editor-GlobalBar-item:hover > .coral-Icon {
+    color: inherit !important;
+    opacity: 1;
+    line-height: 42px;
+}
+
+/* containers */
+.editor-GlobalBar-leftContainer {
+    float: left;
+}
+
+.editor-GlobalBar-centerContainer {
+
+}
+
+.editor-GlobalBar-rightContainer {
+    float: right;
+}
+
+/* special buttons */
+.editor-GlobalBar-layerSwitcher {
+    margin-right: 25px;
+    width: 22px;
+    min-width: 0;
+}
+
+.editor-GlobalBar-previewTrigger {
+    margin-right: 20px;
+}
+
+/* Layer selection related styles */
+.editor-GlobalBar-layerCurrent {
+    min-width: 0;
+    padding: 0 6px;
+}
+
+
+.editor-GlobalBar-layerSwitcherPopoverContent {
+
+}
+
+.editor-GlobalBar-layerSwitcherPopoverContent-trigger {
+    text-align: left;  /* @override */
+    width: 100%; /* @override */
+}
+
+.endor-Badge.editor-GlobalBar-badge:not(.is-selected) {
+    background-color: #919191;
+}
+.editor-ResponsiveGrid {
+
+}
+
+.editor-ResponsiveGrid-overlay-resizeHandle {
+    display: none;
+
+    margin-top: -9px;
+    border: 2px solid #fff;
+    width: 16px;
+    height: 16px;
+
+    border-radius: 9px;
+    background: #208ee5;
+
+    position: absolute;
+    top: 50%;
+
+    z-index: 70;
+}
+
+.cq-Overlay.is-selected > .editor-ResponsiveGrid-overlay-resizeHandle {
+    display: block;
+}
+
+.editor-ResponsiveGrid-overlay-resizeHandle--left {
+    margin-left: -9px;
+    left: 0;
+}
+
+.editor-ResponsiveGrid-overlay-resizeHandle--right {
+    margin-left: -9px;
+    left: 100%;
+}
+
+.editor-ResponsiveGrid-unHideButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-radius: 0;
+}
+
+.editor-ResponsiveGrid-unHideButton {
+    background-color: #454545 !important;
+    color: #ffffff !important;
+    min-width: 0;
+
+    width: 60px;
+    height: 44px;
+
+    box-sizing: border-box;
+
+    z-index: 300;
+}
+
+.editor-ResponsiveGrid-unHideButton > .coral-Icon {
+    opacity: 0.6;
+}
+
+.editor-ResponsiveGrid-unHideButton:hover > .coral-Icon {
+    opacity: 1;
+}
+
+.editor-ResponsiveGrid-overlayHiddenComponent {
+    background-color: rgba(135, 190, 255, 0.5);
+}
+
+/* background grid for resizing */
+.editor-ResponsiveGrid-resizeGrid {
+    pointer-events: none;
+}
+
+.editor-ResponsiveGrid-resizeGrid-column {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.editor-ResponsiveGrid-resizeGrid-column:nth-of-type(2n) {
+    background: rgba(50, 135, 210, 0.2);
+}
+.InsertComponentDialog {
+
+}
+
+.InsertComponentDialog-components {
+    padding: 0;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.InsertComponentDialog-list {
+    position: static;
+    margin: 0;
+    max-height: none;
+    border-radius: 0;
+}
+
+.InsertComponentDialog-component {
+    width: 100%;
+    text-align: left;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    color: #e6e6e6;
+}
+
+
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2013 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+/**************************************
+* SidePanel for Mobile
+**************************************/
+@media screen and (max-width: 1024px) {
+    .sidepanel #components-filter {
+        width: 18rem;
+    }
+}
+
+/**************************************
+* SidePanel for Desktop
+**************************************/
+@media screen and (min-width: 1025px) {
+    .sidepanel .componentfilter {
+        width: 100%;
+    }
+
+    .sidepanel #components-filter {
+        border-bottom: .0625rem solid #e1e1e1;
+    }
+}
+
+/* cards */
+.sidepanel .components.grid .card-component {
+    margin: 0 0 0;
+    max-width: 100%;
+    min-width: 30%;
+    padding-right: 0.875rem;
+    background: transparent;
+}
+
+.sidepanel .components.grid .card-component[data-group^="."]{
+    display: none;
+}
+
+.sidepanel .components.grid .card-component > a {
+    height: 100%;
+    padding-top: 3rem;
+    /*
+        due to a bug in iOS 8.0+ where the callout appear on <a>
+        https://bugs.webkit.org/show_bug.cgi?id=136685
+        https://jira.corp.adobe.com/browse/CQ-37120
+    */
+    pointer-events: none;
+}
+
+.sidepanel .components.grid .card-component > a > div.label {
+    background: #fff;
+    margin-bottom: 0;
+    position: relative;
+    padding: 0.5rem 0;
+    font-weight: lighter;
+}
+
+.sidepanel .components.grid .card-component > a > div.label em {
+    font-style: normal;
+    font-size: 0.625rem;
+    padding: 0 0.375rem;
+    text-transform: uppercase;
+}
+
+.sidepanel .components.grid .card-component > a > div.label h4 {
+    display: table-cell;
+    vertical-align: bottom;
+    white-space: normal;
+    padding: 0 0.375rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem; /* 0.3rem extra because the AdobeClean baseline is not aligned */
+    font-weight: normal;
+    color: #777777;
+}
+
+/* green */
+.sidepanel .components.grid > div .card-component > a.card-green {
+    background: #649137; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-green {
+    background: #7daf4b; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-green {
+    background: #8cc350; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-green {
+    background: #a5d273; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-green {
+    background: #c8e1aa; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-green {
+    background: #dcebcd; /* 3 shades lighter */
+}
+
+/* lavender */
+.sidepanel .components.grid > div .card-component > a.card-lavender {
+    background: #3c466e; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-lavender {
+    background: #465a87; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-lavender {
+    background: #5a6eaa; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-lavender {
+    background: #7d8cbe; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-lavender {
+    background: #afb9d7; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-lavender {
+    background: #c8d2e6; /* 3 shades lighter */
+}
+
+/* purple */
+.sidepanel .components.grid > div .card-component > a.card-purple {
+    background: #961e73; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-purple {
+    background: #b93282; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-purple {
+    background: #d755a5; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-purple {
+    background: #e173b9; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-purple {
+    background: #ebaad2; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-purple {
+    background: #f5cde6; /* 3 shades lighter */
+}
+
+/* cyan */
+.sidepanel .components.grid > div .card-component > a.card-cyan {
+    background: #00829b; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-cyan {
+    background: #00a0be; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-cyan {
+    background: #1ebed7; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-cyan {
+    background: #78d7e6; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-cyan {
+    background: #aae6f0; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-cyan {
+    background: #beebf5; /* 3 shades lighter */
+}
+
+/* ocher */
+.sidepanel .components.grid > div .card-component > a.card-ocher {
+    background: #c37300; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-ocher {
+    background: #e18c00; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-ocher {
+    background: #f0a01e; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-ocher {
+    background: #f5b95a; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-ocher {
+    background: #fad296; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-ocher {
+    background: #fae6be; /* 3 shades lighter */
+}
+
+/* violet */
+.sidepanel .components.grid > div .card-component > a.card-violet {
+    background: #644ba0; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-violet {
+    background: #826ee1; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-violet {
+    background: #9b8ce6; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-violet {
+    background: #b4aaeb; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-violet {
+    background: #d2c8f5; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-violet {
+    background: #e1dcfa; /* 3 shades lighter */
+}
+
+/* mint */
+.sidepanel .components.grid > div .card-component > a.card-mint {
+    background: #28826e; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-mint {
+    background: #32a08c; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-mint {
+    background: #3cb5a0; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-mint {
+    background: #78c8be; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-mint {
+    background: #aadcd7; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-mint {
+    background: #cdebe6; /* 3 shades lighter */
+}
+
+/* aqua */
+.sidepanel .components.grid > div .card-component > a.card-aqua {
+    background: #1e5a8c; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-aqua {
+    background: #286eaf; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-aqua {
+    background: #3287d2; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-aqua {
+    background: #7dafe6; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-aqua {
+    background: #aacdf0; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-aqua {
+    background: #d2e6f5; /* 3 shades lighter */
+}
+
+/* magenta */
+.sidepanel .components.grid > div .card-component > a.card-magenta {
+    background: #c81950; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-magenta {
+    background: #dc3c69; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-magenta {
+    background: #f0557d; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-magenta {
+    background: #f5789b; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-magenta {
+    background: #faafc3; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-magenta {
+    background: #facddc; /* 3 shades lighter */
+}
+
+/* frog */
+.sidepanel .components.grid > div .card-component > a.card-frog {
+    background: #28826e; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-frog {
+    background: #32a08c; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-frog {
+    background: #3cb5a0; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-frog {
+    background: #78c8be; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-frog {
+    background: #aadcd7; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-frog {
+    background: #cdebe6; /* 3 shades lighter */
+}
+
+/* orange */
+.sidepanel .components.grid > div .card-component > a.card-orange {
+    background: #be4b00; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-orange {
+    background: #dc5f00; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-orange {
+    background: #eb782d; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-orange {
+    background: #f0965a; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-orange {
+    background: #fabe9b; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-orange {
+    background: #fad7be; /* 3 shades lighter */
+}
+
+/* blue */
+.sidepanel .components.grid > div .card-component > a.card-blue {
+    background: #0a78c8; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-blue {
+    background: #4196e6; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-blue {
+    background: #78b4f5; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-blue {
+    background: #afd2fa; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-blue {
+    background: #bedcfa; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-blue {
+    background: #d7ebfa; /* 3 shades lighter */
+}
+
+/* darkgreen */
+.sidepanel .components.grid > div .card-component > a.card-darkgreen {
+    background: #467d55; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-darkgreen {
+    background: #50965a; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-darkgreen {
+    background: #5faf69; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-darkgreen {
+    background: #82c387; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-darkgreen {
+    background: #b4dcb9; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-darkgreen {
+    background: #d2ebd2; /* 3 shades lighter */
+}
+
+/* fuchsia */
+.sidepanel .components.grid > div .card-component > a.card-fuchsia {
+    background: #822d87; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-fuchsia {
+    background: #964196; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-fuchsia {
+    background: #aa5faf; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-fuchsia {
+    background: #c387be; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-fuchsia {
+    background: #d7b4d2; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-fuchsia {
+    background: #e6d2e6; /* 3 shades lighter */
+}
+
+/* coral */
+.sidepanel .components.grid > div .card-component > a.card-coral {
+    background: #d22d1e; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-coral {
+    background: #f04641; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-coral {
+    background: #fa5a50; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-coral {
+    background: #fa7873; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-coral {
+    background: #faaaaa; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-coral {
+    background: #facdcd; /* 3 shades lighter */
+}
+
+/* yellow */
+.sidepanel .components.grid > div .card-component > a.card-yellow {
+    background: #d29600; /* 2 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n) .card-component:nth-child(3n-1) > a.card-yellow {
+    background: #e6b43c; /* 1 shades darker */
+}
+.sidepanel .components.grid > div:nth-child(3n-3) .card-component:nth-child(2n-3) > a.card-yellow {
+    background: #f5c841; /* core color */
+}
+.sidepanel .components.grid > div:nth-child(2n-3) .card-component:nth-child(2n-6) > a.card-yellow {
+    background: #fad269; /* 1 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-1) .card-component:nth-of-type(odd) > a.card-yellow {
+    background: #fae6a5; /* 2 shades lighter */
+}
+.sidepanel .components.grid > div:nth-child(3n-2) .card-component:nth-child(7n-4) > a.card-yellow {
+    background: #faf0c8; /* 3 shades lighter */
+}
+
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2013 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+.sidepanel-opened .js-SidePanel-content .selected-filter-panel .taglist-clearall {
+    float: left;
+}
+
+
+.sidepanel-opened .js-SidePanel-content .selected-filter-panel .taglist {
+    padding-top: 1rem;
+}
+
+.sidepanel-opened .js-SidePanel-content .grid .card-asset {
+    max-width: 100%;
+    min-width: 30%;
+    min-height: 5.875rem;
+    background-color: #ffffff;
+}
+
+.sidepanel-opened .js-SidePanel-content .resultspinner {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+    padding: 0.975rem 0;
+    border-bottom-left-radius:0.1875rem;
+}
+
+.sidepanel-opened .js-SidePanel-content .resultspinner .status {
+    color:#888888;
+    font-size:1rem;
+    font-weight: lighter;
+    padding-top:0.625rem;
+    text-align: center;
+}
+
+.sidepanel-opened .js-SidePanel-content .loadmore {
+    #display: block;
+    text-align: center;
+}
+
+/**************************************
+* SidePanel for Desktop
+**************************************/
+@media screen and (min-width: 1025px) {
+    /********************************************************
+    * Asset cards in asset finder show their info on hover
+      unless supplied with a .card-asset--showLabel modifier
+    ********************************************************/
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card .label {
+        -webkit-transition: opacity 0.2s;
+        -moz-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+        opacity: 0;
+        display: block;
+
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-color: #000000;
+        min-height: 5.875rem;
+    }
+
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card:hover .label {
+        display: block;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card .label > h4 {
+        font-size: 0.8125rem;
+        color: white;
+    }
+
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card .label p {
+        font-size: 0.8125rem;
+        color: #bbbbbb;
+        font-weight: normal;
+        line-height: 1.625rem;
+    }
+
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card .label .info {
+        border-top: 0.0625rem solid #bbbbbb;
+        margin: 0.5625rem;
+        padding-top: 1rem;
+    }
+
+    .sidepanel-opened .assetfinder-content-container .card-asset:not(.card-asset--showLabel) .card .label .info p {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+/**************************************
+* SidePanel for Mobile
+**************************************/
+@media screen and (max-width: 1024px) {
+
+    .sidepanel-content .filter-panel .assetfilter label {
+        line-height: 2.25rem;
+    }
+}
+
+/**************************************
+* SidePanel Inner Rail
+**************************************/
+.sidepanel-opened .js-SidePanel-content .rail-view {
+    display: none;
+}
+
+.sidepanel-opened .js-SidePanel-content .rail-view.active {
+    display: block;
+}
+
+.sidepanel #assetfinder-filter-detail {
+    margin-top: 0.5rem;
+}
+
+/**************************************
+* SidePanel filter
+**************************************/
+.sidepanel-tab-assets .coral-Collapsible {
+    background: inherit;
+}
+
+.sidepanel-tab-assets .coral-Collapsible ul {
+    display: table;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/**
+filters get hidden by using jQuery .hide(), so the hidden element will they have display: none as an inline style
+- add the line on the top of a collapsible if the collapsible above another collapsible is hidden
+- remove the line on the top if the collapsible is not the first element of assetfilters
+**/
+.sidepanel-tab-assets #assetfinder-filter-detail .assetfilter[style*='display: none;'].coral-Collapsible--block + .coral-Collapsible--block {
+    border-top: .0625rem solid #e1e1e1;
+}
+
+.sidepanel-tab-assets #assetfinder-filter-detail .assetfilter:not([style*='display: none;']):not(.coral-Collapsible) + .coral-Collapsible--block {
+    border-top: none;
+}
+
+.sidepanel-tab-assets .coral-Collapsible:not(.coral-Collapsible--singlecolumn) .coral-Form-fieldwrapper {
+    display: inline-block;
+    width: 7.5rem;
+    float: left;
+}
+
+.sidepanel-tab-assets .coral-Collapsible:not(.coral-Collapsible--singlecolumn) .coral-Form-fieldwrapper--singleline {
+    display: inline-block;
+    width: 9rem;
+    float: left;
+}
+
+.sidepanel-tab-assets .coral-Collapsible .coral-Form-field {
+    margin-top: 0;
+}
+
+.sidepanel-tab-assets .filter-panel .range-predicate:not(.coral-Collapsible-content) {
+    margin-bottom: 0.7rem;
+    width: 14.0625rem
+}
+
+
+.sidepanel-tab-assets .filter-panel .range-predicate input {
+    width: 4.5rem;
+    min-width: 3rem;
+}
+
+.sidepanel-tab-assets .filter-panel .range-predicate .js-coral-validation-error {
+    margin-left: 0.375rem;
+    margin-top: 0.5rem;
+}
+
+.sidepanel-tab-assets .filter-panel .range-predicate .max-range-val {
+    margin: 0.3rem;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 3rem;
+}
+
+.sidepanel-tab-assets .filter-panel .range-predicate .min-range-val {
+    margin: 0.3rem;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 3rem;
+    margin-left: 0;
+}
+
+.sidepanel-tab-assets .slider-predicate ul.coral-Slider-tickLabels {
+    display: none;
+}
+
+/** add :not(.coral-Collapsible--singlecolumn) to make this rule stronger **/
+.sidepanel-tab-assets .daterange-predicate:not(.coral-Collapsible--singlecolumn) .coral-Form-fieldwrapper {
+    display: block;
+    float: none;
+}
+
+/**************************************
+* Paragraph cards
+**************************************/
+.card-asset[data-type="Paragraphs"] .image {
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+  max-height: 225px;
+}
+
+.card-asset[data-type="Paragraphs"] .image:after {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/**
+Paragraphs excerpts
+**/
+.card-asset[data-type="Paragraphs"] .image p,
+.card-asset[data-type="Paragraphs"] .image h1,
+.card-asset[data-type="Paragraphs"] .image h2,
+.card-asset[data-type="Paragraphs"] .image h3 {
+      margin: 0.375rem 0.625rem;
+      font-size: inherit;
+}
+
+.card-asset[data-type="Paragraphs"] .image .title,
+.card-asset[data-type="Paragraphs"] .image .more {
+    display: block
+}
+
+.cq-Tree .cq-Tree-level {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.cq-Tree .cq-Tree-level .cq-Tree-level {
+  margin: 0.625rem -2rem -0.25rem -1.125rem;
+}
+.cq-Tree .cq-Tree-level .cq-Tree-level .cq-Tree-item {
+  margin: 0 1rem 0 1.5rem;
+}
+.cq-Tree .cq-Tree-level .cq-Tree-level .cq-Tree-item:first-of-type {
+  border-top: 0.0625rem solid #f3f3f3;
+}
+.cq-Tree .cq-Tree-level .cq-Tree-level .cq-Tree-item:last-of-type {
+  margin-bottom: -1rem;
+  border-bottom: none;
+}
+.cq-Tree .cq-Tree-item {
+  margin: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: 0.0625rem solid #f3f3f3;
+  border-left: none;
+  background: #e8e8e8;
+}
+.cq-Tree .cq-Tree-itemHeader {
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.375rem;
+  background: #e8e8e8;
+  margin: 0;
+}
+.cq-Tree .cq-Tree-itemHeader:hover,
+.cq-Tree .cq-Tree-itemHeader:hover:focus {
+  background: #eeeeee;
+}
+.cq-Tree .cq-Tree-itemHeader:focus {
+  background: #e8e8e8;
+}
+.cq-Tree .cq-Tree-itemChildCount {
+  padding-left: 0.5rem;
+  font-weight: normal;
+  color: #969696;
+}
+.cq-Tree.cq-Tree--withDetails .cq-Tree-itemHeader {
+  padding: 0.4375rem 2rem 0.4375rem 0.9375rem;
+  cursor: pointer;
+}
+.cq-Tree.cq-Tree--withDetails .cq-Tree-itemHeader .u-coral-pullRight {
+  margin: 0.25rem -0.9375rem 0 0;
+}
+
+.u-scrollable {
+  overflow: auto;
+}
+.u-emptyMessage {
+  font-style: italic;
+  color: #969696 !important;
+  padding: 1em !important;
+}
+.cq-Timer {
+  -moz-box-sizing: border-box;
+  border-radius: 0.1875rem;
+  display: inline-block;
+  font-family: adobe-clean, Helvetica, Arial, sans-serif;
+  height: 1.5rem;
+  line-height: 1rem;
+  margin: 0;
+  padding: 0.25rem 0.5rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #4b4b4b;
+  background: rgba(150, 150, 150, 0.3);
+}
+.cq-Timer--bad {
+  background-color: #fffa85;
+}
+.cq-Timer--horrible {
+  background-color: #ffa75f;
+}
+.u-preFormatted {
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  display: block;
+  white-space: pre;
+}
+.coral-TabPanel-tab.coral-TabPanel-tab--icon i.is-error {
+  color: #fa786e;
+}
+.coral-TabPanel-tab.coral-TabPanel-tab--icon.is-active i.is-error,
+.coral-TabPanel-tab.coral-TabPanel-tab--icon i.is-error:hover {
+  color: #fa483e;
+}
+.cq-DeveloperRail .cq-DeveloperRail-listItem {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  padding: 0.4375rem 2rem 0.4375rem 0.9375rem;
+  background-color: #e8e8e8;
+  border-bottom: 0.0625rem solid #f3f3f3;
+}
+.cq-DeveloperRail .cq-DeveloperRail-listItem:hover {
+  background-color: #eeeeee;
+}
+.cq-DeveloperRail .cq-DeveloperRail-listItem .u-coral-pullRight {
+  margin: 0.25rem -0.9375rem 0 0;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsTitle {
+  margin: 0;
+  line-height: 1.375rem;
+  font-weight: normal;
+  padding: 0.4375rem 1rem 0.625rem 0.9375rem;
+  background-color: #e8e8e8;
+  border-bottom: 0.0625rem solid #f3f3f3;
+  cursor: pointer;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsTitle.is-error {
+  background-color: #fa786e;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsTitle .coral-Icon {
+  margin-right: 0.5rem;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsSection {
+  padding: 0.4375rem 0 0.4375rem 0.9375rem;
+  background-color: #e8e8e8;
+  border-bottom: 0.0625rem solid #f3f3f3;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsSectionHeader {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #969696;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsSectionContent {
+  margin: 0;
+  padding: 0.4375rem 0 0.4375rem 0.9375rem;
+  list-style-type: none;
+}
+.cq-DeveloperRail .cq-DeveloperRail-detailsSectionContentListItem {
+  padding: 0.25rem 0;
+}
+.cq-DeveloperRail .cq-DeveloperRail-actionTrigger {
+  margin: 0.125rem 0 0 1.375rem;
+  color: #303030;
+  font-style: normal;
+  opacity: 0.75;
+  cursor: pointer;
+  text-decoration: none;
+}
+.cq-DeveloperRail .cq-DeveloperRail-actionTrigger.is-error {
+  color: #fa483e;
+}
+.cq-DeveloperRail .cq-DeveloperRail-actionTrigger:hover {
+  opacity: 1;
+}
+.cq-DeveloperRail .cq-DeveloperRail-actionTrigger.cq-DeveloperRail-actionTrigger--defaultAction:before {
+  color: #2583d8;
+}
+.cq-DeveloperRail .coral-Icon.js-toggle-demo-mode.is-active {
+  color: #2583d8;
+}
+.cq-Tree.cq-Tree--componentTree .cq-Tree-item.is-selected > .cq-Tree-itemHeader {
+  color: #2583d8;
+}
+.cq-Tree.cq-Tree--componentTree .cq-Tree-item.is-selected > .cq-Tree-itemHeader .coral-Icon:before {
+  color: #2583d8;
+}
+.cq-Tree.cq-Tree--componentTree .cq-Tree-item.is-active > .cq-Tree-itemHeader .cq-Timer.is-childless {
+  display: none;
+}
+
+/* @deprecated */
+.pageinfo-unpublishconfirm {
+    display: none;
+}
+
+/* editor-PageInfo */
+.editor-PageInfo {
+
+}
+
+.editor-PageInfo-action {
+    width: 100%; /* @override */
+    text-align: left; /* @override */
+}
+
+.editor-PageInfo-text {
+    line-height: 1.5em;
+    color: rgb(150, 150, 150);
+}
+
+.editor-PageInfoAction {
+
+}
+
+.editor-PageInfoAction-header {
+    height: 2.875rem;
+    padding-left: 0.9375rem;
+    border-bottom: 0.0625rem solid rgba(200, 200, 200, 100);
+    line-height: 2.875rem;
+}
+
+.editor-PageInfoAction-content {
+    padding: 0.9375rem;
+}
+
+.editor-PageInfoAction-buttons {
+    padding-top: 0.9375rem;
+}
+
+.editor-PageInfoAction-buttons-button {
+    min-width: 0; /* override */
+}
+.cq-workflow-start-modal .coral-Modal-body {
+    overflow: visible; /* @coral */
+}
+
+/* for the coralui2 transition */
+#TourForm {
+    display: none;
+}
+
+.js-sidePanel-edit .rail-switch {
+    display: none;
+}

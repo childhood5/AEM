@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Company Project - UI content</comment>
+<entry key="createdBy">tong.pham</entry>
+<entry key="name">company.trainning.project.ui.content</entry>
+<entry key="created">2018-03-27T19:52:44.276+0700</entry>
+<entry key="groupId">com.adobe.trainning</entry>
+<entry key="version">0.0.1-SNAPSHOT</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="group">Company Project Content Package</entry>
+<entry key="description">UI content package for Company Project</entry>
+<entry key="artifactId">company.trainning.project.ui.content</entry>
+<entry key="path">/etc/packages/Company Project Content Package/company.trainning.project.ui.content.zip</entry>
+</properties>

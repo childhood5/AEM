@@ -1,0 +1,50 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1522155163482
+Build-Jdk: 1.8.0_51
+Built-By: tong.pham
+Bundle-Description: Core bundle for Company Project
+Bundle-ManifestVersion: 2
+Bundle-Name: Company Project - Core
+Bundle-SymbolicName: com.adobe.trainning.company.trainning.project.core
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.adobe.trainning.core.core.component;version="0.0.1";
+ uses:="com.adobe.cq.sightly,com.adobe.trainning.core.core.models,org.ap
+ ache.sling.api,org.apache.sling.api.servlets,org.slf4j",com.adobe.train
+ ning.core.core.filters;version="0.0.1";uses:="javax.servlet",com.adobe.
+ trainning.core.core.listeners;version="0.0.1";uses:="org.osgi.service.e
+ vent",com.adobe.trainning.core.core.models;version="0.0.1";uses:="com.d
+ ay.cq.dam.api,javax.annotation,javax.inject,org.apache.sling.api.resour
+ ce,org.apache.sling.models.annotations",com.adobe.trainning.core.core;v
+ ersion="1.0",com.adobe.trainning.core.core.schedulers;version="0.0.1",c
+ om.adobe.trainning.core.core.servlets;version="0.0.1";uses:="javax.serv
+ let,org.apache.sling.api,org.apache.sling.api.servlets"
+Import-Package: javax.inject;version="0.0.0",com.adobe.cq.commerce.commo
+ n;version="[3.5,4)",com.adobe.cq.sightly;version="[2.5,3)",com.adobe.gr
+ anite.ui.components.ds;version="[1.1,2)",com.day.cq.dam.api;version="[1
+ .16,2)",com.day.cq.wcm.api;version="[1.17,2)",javax.annotation,javax.se
+ rvlet,org.apache.commons.collections;version="[3.2,4)",org.apache.commo
+ ns.collections.iterators;version="[3.2,4)",org.apache.sling.api;version
+ ="[2.3,3)",org.apache.sling.api.request;version="[2.4,3)",org.apache.sl
+ ing.api.resource;version="[2.9,3)",org.apache.sling.api.servlets;versio
+ n="[2.1,3)",org.apache.sling.api.wrappers;version="[2.5,3)",org.apache.
+ sling.commons.osgi;version="[2.4,3)",org.apache.sling.models.annotation
+ s;version="[1.2,2)",org.apache.sling.settings;version="[1.3,2)",org.osg
+ i.service.event;version="[1.2,2)",org.slf4j;version="[1.5,2)"
+Provide-Capability: osgi.service;effective:=active;objectClass="javax.se
+ rvlet.Servlet";service.vendor=Adobe,osgi.service;effective:=active;obje
+ ctClass="java.lang.Runnable";scheduler.expression="*/30 * * * * ?";sche
+ duler.concurrent=false;service.vendor=Adobe,osgi.service;effective:=act
+ ive;objectClass="javax.servlet.Filter";service.ranking=-700;sling.filte
+ r.scope=REQUEST;service.vendor=Adobe,osgi.service;effective:=active;obj
+ ectClass="org.osgi.service.event.EventHandler";event.topics="org/apache
+ /sling/api/resource/Resource/*";service.vendor=Adobe
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Service-Component: OSGI-INF/com.adobe.trainning.core.core.filters.Loggin
+ gFilter.xml,OSGI-INF/com.adobe.trainning.core.core.schedulers.SimpleSch
+ eduledTask.xml,OSGI-INF/com.adobe.trainning.core.core.component.HandleC
+ laim.xml,OSGI-INF/com.adobe.trainning.core.core.listeners.SimpleResourc
+ eListener.xml,OSGI-INF/com.adobe.trainning.core.core.servlets.SimpleSer
+ vlet.xml
+Sling-Model-Packages: com.adobe.trainning.core.core
+Tool: Bnd-2.3.0.201405100607

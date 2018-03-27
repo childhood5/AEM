@@ -1,0 +1,21 @@
+
+<div class="inner-medium">
+    <div id="breadcrumb" data-sly-use.main="com.adobe.trainning.core.core.component.Breadcrumb">
+        <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" data-sly-list="${main.breadcrumbs}">
+           	
+            <li class="list-item" itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement" data-sly-test="${itemList.first}">
+                <a href="/content/companyproject.html">Home</a>
+            </li>
+            <li class="list-item" itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement" data-sly-test="${!itemList.first && !itemList.last}">
+                 <a href="/content/companyproject/en/activities_page.html" title="${item.title}" itemprop="item"> 
+                 	<span itemprop="name">${item.title}</span>
+				</a>
+				<meta itemprop="position" content="${itemList.index}">
+			</li>
+            <li class="list-item last-item" itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement" data-sly-test="${itemList.last}">
+                <span itemprop="name">${item.title}</span>
+                <meta itemprop="position" content="2">
+            </li>
+       </ol>
+    </div>
+</div>

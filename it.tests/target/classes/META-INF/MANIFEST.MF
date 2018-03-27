@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1522155164794
+Build-Jdk: 1.8.0_51
+Built-By: tong.pham
+Bundle-Description: Bundles for Integration Tests for Company Project
+Bundle-ManifestVersion: 2
+Bundle-Name: Company Project - Integration Tests Bundles
+Bundle-SymbolicName: com.adobe.trainning.company.trainning.project.it.te
+ sts
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.adobe.trainning.core.it.tests;version="0.0.1";uses:=
+ "org.apache.sling.junit.annotations,org.junit,org.junit.runner"
+Import-Package: com.adobe.trainning.core.core.models;version="[0.0,1)",o
+ rg.apache.sling.junit.annotations;version="[1.0,2)",org.apache.sling.se
+ ttings;version="[1.3,2)",org.junit,org.junit.runner
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Sling-Test-Regexp: .*Test
+Tool: Bnd-2.3.0.201405100607
