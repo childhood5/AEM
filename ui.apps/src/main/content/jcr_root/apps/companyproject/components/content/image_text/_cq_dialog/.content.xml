@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Article Body - Video"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <generalTab
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Article Video"
+                        sling:resourceType="granite/ui/components/foundation/section">
+                        <layout
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"
+                            margin="{Boolean}false"/>
+                        <items jcr:primaryType="nt:unstructured">
+                            <column
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <image
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                        fieldDescription="558x 04 px or 368x134 px"
+                                        fieldLabel="Image"
+                                        name="./image"
+                                        rootPath="/content/dam/companyproject"/>
+                                    <title
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                        fieldLabel="Title"
+                                        name="./title"/>
+                                    <description
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/textarea"
+                                        fieldLabel="Description"
+                                        name="./description"/>
+                                    <position
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/select"
+                                        class="cq-dialog-select-media"
+                                        emptyText="Select"
+                                        fieldLabel="Position"
+                                        id="mediaId"
+                                        multiple="{Boolean}false"
+                                        name="./position">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <right
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Image of right"
+                                                value="right"/>
+                                            <left
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Image of left"
+                                                value="left"/>
+                                        </items>
+                                    </position>
+                                </items>
+                            </column>
+                        </items>
+                    </generalTab>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>

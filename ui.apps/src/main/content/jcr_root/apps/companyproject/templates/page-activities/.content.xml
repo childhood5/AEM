@@ -11,9 +11,6 @@
         <par
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wcm/foundation/components/parsys"/>
-        <topnav
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="companyproject/components/structure/topnav"/>
     </jcr:content>
     
 </jcr:root>
