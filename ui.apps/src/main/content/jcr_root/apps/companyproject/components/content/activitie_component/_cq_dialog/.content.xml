@@ -28,7 +28,7 @@
                             sling:resourceType="granite/ui/components/foundation/form/select"
                             name="./childnode"
                             panel-eaem-nested="">
-                            <datasource
+							<datasource
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="/apps/companyproject/components/datasource/mylist/mylist.html"/>
                         </field>

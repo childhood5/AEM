@@ -10,7 +10,8 @@
         sling:resourceType="companyproject/components/structure/pageactivities">
         <par
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="wcm/foundation/components/parsys"/>
+            sling:resourceType="wcm/foundation/components/parsys"
+            components="[foundation/components/text,foundation/components/image]/>
     </jcr:content>
     
 </jcr:root>

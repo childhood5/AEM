@@ -75,6 +75,7 @@
 	                  sling:orderBefore="tags"
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
 	                  fieldLabel="Description"
+	                  maxlength="{Long}150"
 	                  name="./descriptionCustome"
 	                  renderReadOnly="{Boolean}true"/>
 	              <imageCustome
