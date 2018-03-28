@@ -7,5 +7,14 @@
         jcr:mixinTypes="[sling:Message]"
         jcr:primaryType="nt:folder"
         sling:key="&amp;copy; {0} Company Project Site Site. All rights reserved."
-        sling:message="&amp;copy; {0} Company Project Site Site. Tous droits réservés."/>
+        sling:message="&amp;copy; {0} Company Project Site Site. Tous droits réservés."
+        
+        <hello
+	    	jcr:mixinTypes="[sling:Message]"
+	        jcr:primaryType="nt:unstructured"
+	        sling:key="hello"
+	        sling:message="Company Project Site Site. Tous droits réservés."/>
+        
+       </copyright>
+    
 </jcr:root>

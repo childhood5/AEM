@@ -54,7 +54,7 @@ public class TouchMultiComponent extends WCMUsePojo {
 			
 			List<Page> pages = getAllChildPages(currentPage);
 			for(Page page: pages) {
-				 countries.put(page.getTitle(), page.getPath());
+				 countries.put(page.getPath(), page.getPath());
 			}
 			
 			 @SuppressWarnings("unchecked")
@@ -85,7 +85,7 @@ public class TouchMultiComponent extends WCMUsePojo {
 		return submenuItems;
 	}
 	
-	private List<Page> getAllChildPages(Page currentPage) {
+	public static List<Page> getAllChildPages(Page currentPage) {
 		List<Page> pages = new ArrayList<Page>();
 		try {
 			Iterator<Page> iterable = currentPage.listChildren();

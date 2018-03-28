@@ -2,34 +2,94 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured">
     <content jcr:primaryType="nt:unstructured">
-        <items jcr:primaryType="nt:unstructured">
-            <tabs jcr:primaryType="nt:unstructured">
-                <items jcr:primaryType="nt:unstructured">
-                    <basic jcr:primaryType="nt:unstructured">
-                        <items jcr:primaryType="nt:unstructured">
-                            <column jcr:primaryType="nt:unstructured">
-                                <items jcr:primaryType="nt:unstructured">
-                                    <title jcr:primaryType="nt:unstructured">
-                                        <items jcr:primaryType="nt:unstructured">
-                                            <title
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:orderBefore="pagename"
-                                                fieldLabel="Title (in first position!)"
-                                                allowBulkEdit="true"/>
-                                        </items>
-                                    </title>
-                                    <moretitles
-                                        cq:showOnCreate="{Boolean}false"
-                                        jcr:primaryType="nt:unstructured"/>
-                                </items>
-                            </column>
-                        </items>
-                    </basic>
-                    <advanced
-                        cq:showOnCreate="{Boolean}false"
-                        jcr:primaryType="nt:unstructured"/>
+     <items jcr:primaryType="nt:unstructured">
+      <tabs jcr:primaryType="nt:unstructured">
+       <items
+         jcr:primaryType="nt:unstructured"
+         sling:hideChildren="permissions">
+         <custom
+             jcr:primaryType="nt:unstructured"
+             jcr:title="Custom"
+             sling:orderBefore="basic"
+             sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+             <items jcr:primaryType="nt:unstructured">
+              <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+               <items jcr:primaryType="nt:unstructured">
+               	  <iconCustome
+                      jcr:primaryType="nt:unstructured"
+                      sling:resourceType="granite/ui/components/foundation/form/select"
+                      class="cq-dialog-select-media"
+                      emptyText="Select"
+                      fieldLabel="Icon"
+                      id="mediaId"
+                      multiple="{Boolean}false"
+                      name="./iconCustome">
+                      <items jcr:primaryType="nt:unstructured">
+                          <activity_horseRiding
+                              jcr:primaryType="nt:unstructured"
+                              text="Activity_HorseRiding"
+                              value="icon-Activity_HorseRiding"/>
+                          <golf
+                              jcr:primaryType="nt:unstructured"
+                              text="Golf"
+                              value="icon-Golf"/>
+                          <activity_activityChildren
+                              jcr:primaryType="nt:unstructured"
+                              text="Activity_ActivityChildren"
+                              value="icon-Activity_ActivityChildren"/>
+                          <cure
+                              jcr:primaryType="nt:unstructured"
+                              text="Cure"
+                              value="icon-Cure"/>
+                          <casino
+                              jcr:primaryType="nt:unstructured"
+                              text="Casino"
+                              value="icon-Casino"/>
+                          <gastronomy
+                              jcr:primaryType="nt:unstructured"
+                              text="Gastronomy"
+                              value="icon-Gastronomy"/>
+                      </items>
+                  </iconCustome>
+                  <nameCustome
+	                  cq:showOnCreate="{Boolean}true"
+	                  jcr:primaryType="nt:unstructured"
+	                  sling:orderBefore="tags"
+	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+	                  fieldLabel="Name"
+	                  name="./nameCustome"
+	                  renderReadOnly="{Boolean}true"/>
+                  <titleCustome
+	                  cq:showOnCreate="{Boolean}true"
+	                  jcr:primaryType="nt:unstructured"
+	                  sling:orderBefore="tags"
+	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+	                  fieldLabel="Title"
+	                  name="./titleCustome"
+	                  renderReadOnly="{Boolean}true"/>
+	              <descriptionCustome
+	                  cq:showOnCreate="{Boolean}true"
+	                  jcr:primaryType="nt:unstructured"
+	                  sling:orderBefore="tags"
+	                  sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+	                  fieldLabel="Description"
+	                  name="./descriptionCustome"
+	                  renderReadOnly="{Boolean}true"/>
+	              <imageCustome
+                      jcr:primaryType="nt:unstructured"
+                      sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                      fieldDescription="558x 04 px or 368x134 px"
+                      fieldLabel="Image"
+                      name="./imageCustome"
+                      rootPath="/content/dam/companyproject"/>
                 </items>
-            </tabs>
-        </items>
-    </content>
+              </column>
+             </items>
+             </custom>
+            </items>
+  </tabs>
+  </items>
+ </content>
 </jcr:root>

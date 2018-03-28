@@ -1,82 +1,49 @@
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
 	Activity componets
 </sly>
-
-<div class="parsys" data-sly-resource="${'par' @ resourceType='/apps/companyproject/components/content/star'}"></div>
-
-
-<div data-sly-use.heroTextObject="com.adobe.trainning.core.core.component.HeroTextComponent" data-sly-test="${heroTextObject}">
-       <h1>This is value of select list: ${heroTextObject.heroTextBean.drop}</h1>
-</div>
-
-
-<div id="js_ajax_injection">
-	<div class="module margin-bottom-xs">
-		<div class="block-nav-envy">
-			<div class="block-envy">
-				<div class="filter-tab"></div>
-				<ul class="scroll-container">
-					<li class="navigation-icon">
-						<a data-scrollto="equitation" class="JS_toggler" onclick="HotelsTagging.activitiesItemClick('Equestrianism', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Activity_HorseRiding"></i><span>Equestrianism</span>
-						</a>
-					</li>
-					<li class="navigation-icon">
-						<a data-scrollto="golf" class="JS_toggler" onclick="HotelsTagging.activitiesItemClick('GOLFS', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Golf"></i><span>GOLFS</span>
-						</a>
-					</li>
-					<li class="navigation-icon"><a
-						data-scrollto="activites-enfants" class="JS_toggler"
-						onclick="HotelsTagging.activitiesItemClick('KIDS BARRIERE', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Activity_ActivityChildren"></i><span>KID'S
-								BARRIÈRE</span>
-					</a></li>
-					<li class="navigation-icon"><a data-scrollto="bien-etre"
-						class="JS_toggler"
-						onclick="HotelsTagging.activitiesItemClick('THALASSOSPABALNEO', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Cure"></i><span>THALASSO-SPA-BALNEO</span>
-					</a></li>
-					<li class="navigation-icon"><a data-scrollto="casinos"
-						class="JS_toggler"
-						onclick="HotelsTagging.activitiesItemClick('CASINO', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Casino"></i><span>CASINO</span>
-					</a></li>
-					<li class="navigation-icon"><a data-scrollto="gastronomie"
-						class="JS_toggler"
-						onclick="HotelsTagging.activitiesItemClick('GASTRONOMY', '/content/hotels/en/our-activities.html');">
-							<i class="icon icon-Gastronomy"></i><span>GASTRONOMY</span>
-					</a></li>
-				</ul>
+<sly data-sly-use.heroTextObject="com.adobe.trainning.core.core.component.HeroTextComponent" data-sly-test="${heroTextObject}">
+	
+	<div id="js_ajax_injection">
+		<div class="module margin-bottom-xs">
+			<div class="block-nav-envy">
+				<div class="block-envy">
+					<div class="filter-tab"></div>
+					<sly data-sly-list="${heroTextObject.pageList}">
+						<ul class="scroll-container">
+							<li class="navigation-icon">
+								<a data-scrollto="equitation" class="JS_toggler" onclick="HotelsTagging.activitiesItemClick('Equestrianism', '${item.path}.html');">
+									<i class="icon " + ${heroTextObject.heroTextBean.icon}></i><span>${item.name}</span>
+								</a>
+							</li>
+						</ul>
+					</sly>
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<span class="sparkle margin-bottom-xxs"></span>
-	<div class="module activity-news margin-bottom-xs">
-		<h2 class="title margin-bottom-xs" id="equitation">Equestrianism</h2>
-	</div>
-
-	<div
-		class="block-trombi-major inner-medium block-vam margin-bottom-very-small block-copyright">
-		<div class="bloc-description block-vam-col" style="background: #231f20; color: #fff;">
-			<h2 class="title-name">Equestrian activities for all types of riders</h2>
-
-			<p class="description">Introductions or refresher courses, long
-				rides or dressage, show jumping or classes for children in La Baule,
-				Cannes, Deauville, Le Touquet and Dinard, Barrière and its partners
-				guarantee an extraordinary stay for all horse lovers.</p>
-			<a class="cta" style="background: #231f20; color: #fff; margin-top: 40px;" href="/content/companyproject/en.html">
-				discover<i style="background: #231f20; color: #fff;" class="icon-arrow"></i>
-			</a>
+		
+		<div class="parsys" data-sly-resource="${'par' @ resourceType='/apps/companyproject/components/content/star'}"></div>
+		
+	
+		<div class="module activity-news margin-bottom-xs">
+			<h2 class="title margin-bottom-xs" id="equitation">${heroTextObject.heroTextBean.name}</h2>
 		</div>
-		<div class="bloc-picture block-vam-col">
-			<img src="/etc/designs/companyproject/clientlib-all/img/layout/logo-barriere.png" alt="Hippisme, Activité national">
+		<div
+			class="block-trombi-major inner-medium block-vam margin-bottom-very-small block-copyright">
+			<div class="bloc-description block-vam-col" style="background: #231f20; color: #fff;">
+				<h2 class="title-name">${heroTextObject.heroTextBean.title}</h2>
+	
+				<p class="description">${heroTextObject.heroTextBean.description}</p>
+				<a class="cta" style="background: #231f20; color: #fff; margin-top: 40px;" href="${heroTextObject.heroTextBean.pagePath}.html">
+					discover<i style="background: #231f20; color: #fff;" class="icon-arrow"></i>
+				</a>
+			</div>
+			<div class="bloc-picture block-vam-col">
+				<img src="${heroTextObject.heroTextBean.image}" alt="${heroTextObject.heroTextBean.name}">
+			</div>
 		</div>
+		
 	</div>
 
-</div>
-
-
+</sly>
 
 
