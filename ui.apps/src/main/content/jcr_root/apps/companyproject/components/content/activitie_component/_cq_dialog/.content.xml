@@ -20,7 +20,7 @@
                         class="full-width with-fieldspanel"
                         fieldDescription="List of Activities"
                         fieldLabel="Activities"
-                        maxItems="{Long}5"
+                        maxlinksallowed="{Long}5"
                         minItems="{Long}1"
                         required="{Boolean}true">
                         <field

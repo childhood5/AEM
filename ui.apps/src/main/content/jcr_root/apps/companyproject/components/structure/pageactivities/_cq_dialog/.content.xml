@@ -59,6 +59,7 @@
 	                  sling:orderBefore="tags"
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
 	                  fieldLabel="Name"
+	                  required="{Boolean}true"
 	                  name="./nameCustome"
 	                  renderReadOnly="{Boolean}true"/>
                   <titleCustome
@@ -67,6 +68,7 @@
 	                  sling:orderBefore="tags"
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
 	                  fieldLabel="Title"
+	                  required="{Boolean}true"
 	                  name="./titleCustome"
 	                  renderReadOnly="{Boolean}true"/>
 	              <descriptionCustome
@@ -76,6 +78,7 @@
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
 	                  fieldLabel="Description"
 	                  maxlength="{Long}150"
+	                  required="{Boolean}true"
 	                  name="./descriptionCustome"
 	                  renderReadOnly="{Boolean}true"/>
 	              <imageCustome
@@ -84,7 +87,7 @@
                       fieldDescription="558x 04 px or 368x134 px"
                       fieldLabel="Image"
                       name="./imageCustome"
-                      rootPath="/content/dam/companyproject"/>
+                      rootPath="/content/dam"/>
                 </items>
               </column>
              </items>

@@ -1,6 +1,10 @@
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
 	Activity componets
 </sly>
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='cq.authoring.dialog'}" data-sly-unwrap/>
+
+
 <sly data-sly-use.heroTextObject="com.adobe.trainning.core.core.component.HeroTextComponent" data-sly-test="${heroTextObject}">
 	
 	<div id="js_ajax_injection">

@@ -9,30 +9,8 @@
             <par
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/foundation/components/parsys"
-                components="[group:Company Project Components]">
-                <colctrl
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="companyproject/components/content/colctrl"
-                    layouts="2;cq-colctrl-lt0&#x9;2 Columns (50%, 50%)"/>
-                <cq:authoring
-                    jcr:primaryType="nt:unstructured">
-                    <assetToComponentMapping jcr:primaryType="nt:unstructured">
-                        <image
-                            jcr:primaryType="nt:unstructured"
-                            assetGroup="media"
-                            assetMimetype="image/*"
-                            droptarget="image"
-                            resourceType="companyproject/components/content/image"
-                            type="Images"/>
-                    </assetToComponentMapping>
-                </cq:authoring>
+                components="[/apps/companyproject/components/content/image_text,/apps/companyproject/components/content/image_component,/apps/companyproject/components/content/activitie_component]">
             </par>
-            <logo
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="companyproject/components/structure/logo"
-                absParent="2">
-                <image/>
-            </logo>
         </page>
     </jcr:content>
 </jcr:root>
