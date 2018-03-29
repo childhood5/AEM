@@ -21,7 +21,7 @@
                         fieldDescription="List of Activities"
                         fieldLabel="Activities"
                         maxlinksallowed="{Long}5"
-                        minItems="{Long}1"
+                        minlinksallowed="{Long}1"
                         required="{Boolean}true">
                         <field
                             jcr:primaryType="nt:unstructured"

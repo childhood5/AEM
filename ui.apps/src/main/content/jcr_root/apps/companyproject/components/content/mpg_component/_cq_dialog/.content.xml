@@ -180,6 +180,17 @@
                             </cui>
                         </uiSettings>
                     </text>
+<!--                     <deptcontact -->
+<!--                         jcr:primaryType="nt:unstructured" -->
+<!--                         sling:resourceType="granite/ui/components/foundation/form/multifield" -->
+<!--                         fieldLabel="Link" -->
+<!--                         name="./deptcontact"> -->
+<!--                         <fieldConfig -->
+<!--                             jcr:primaryType="cq:Widget" -->
+<!--                             fieldLabel="Dept Contact Details" -->
+<!--                             xtype="contactfield"/> -->
+<!--                 	</deptcontact>  -->
+
                 </items>
             </column>
         </items>
