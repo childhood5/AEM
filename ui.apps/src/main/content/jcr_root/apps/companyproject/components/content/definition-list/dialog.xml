@@ -21,20 +21,20 @@
                         <fieldConfig
                             jcr:primaryType="cq:Widget"
                             xtype="multifieldpanel">
-                            <items jcr:primaryType="cq:WidgetCollection">
-                                <term
-                                    jcr:primaryType="cq:Widget"
-                                    fieldLabel="Term"
-                                    key="term"
-                                    width="250"
-                                    xtype="textfield"/>
-                                <definition
-                                    jcr:primaryType="cq:Widget"
-                                    fieldLabel="Definition"
-                                    key="definition"
-                                    width="250"
-                                    xtype="textarea"/>
-                            </items>
+<!--                             <items jcr:primaryType="cq:WidgetCollection"> -->
+<!--                                 <term -->
+<!--                                     jcr:primaryType="cq:Widget" -->
+<!--                                     fieldLabel="Term" -->
+<!--                                     key="term" -->
+<!--                                     width="250" -->
+<!--                                     xtype="textfield"/> -->
+<!--                                 <definition -->
+<!--                                     jcr:primaryType="cq:Widget" -->
+<!--                                     fieldLabel="Definition" -->
+<!--                                     key="definition" -->
+<!--                                     width="250" -->
+<!--                                     xtype="textarea"/> -->
+<!--                             </items> -->
                         </fieldConfig>
                     </definitions>
                     <typehint

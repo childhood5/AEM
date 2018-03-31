@@ -1,179 +1,129 @@
-Ejst.CustomWidget = CQ.Ext.extend(CQ.form.CompositeField, {
- 
-    /**
-     * @private
-     * @type CQ.Ext.form.TextField
-     */
-    hiddenField: null,
- 
-   /**
-    * @private
-    * @type CQ.Ext.form.TextField
-    */
-    linkText: null,
- 
-    /**
-    * @private
-    * @type CQ.Ext.form.TextField
-    */
-    linkHref: null,
- 
- 
-    /**
-     * @private
-     * @type CQ.Ext.form.ComboBox
-     */
-    linkType: null,
- 
-    /**
-     * @private
-     * @type CQ.Ext.form.TextField
-     */
- 
-    formPanel: null,
-     
-    constructor: function(config) {
-        config = config || { };
-        var defaults = {
-            "border": true,
-            "layout": "table",
-            "columns":4
-        };
-        config = CQ.Util.applyDefaults(config, defaults);
-        Ejst.CustomWidget.superclass.constructor.call(this, config);
-    },
- 
-    // overriding CQ.Ext.Component#initComponent
-    initComponent: function() {
-        Ejst.CustomWidget.superclass.initComponent.call(this);
-        //Hidden Field
-        this.hiddenField = new CQ.Ext.form.Hidden({
-            name: this.name
-        });
- 
-        this.add(this.hiddenField);
- 
-        //DROP DOWN
- 
-       this.linkType = new CQ.form.Selection({
-            type:"select",
-            cls:"customwidget-1",
-            listeners: {
-                selectionchanged: {
-                    scope:this,
-                    fn: this.updateHidden
-                }
-            },
-            optionsProvider: this.optionsProvider
-        });
-        this.add(new CQ.Ext.form.Label({
-            cls:"customwidget-label",
-            text: "Type"}));
-        this.add(this.linkType);
- 
-        //Link Text
- 
-        this.linkText = new CQ.Ext.form.TextField({
-            cls:"customwidget-2",
-            id:"valueTxt",
-            listeners: {
-                change: {
-                    scope:this,
-                    fn:this.updateHidden
-                }
-            }
-        });
-        this.add(new CQ.Ext.form.Label({
-            cls:"customwidget-label",
-            text: "Text"}));
-        this.add(this.linkText);
- 
-        //Link HREF Starts
- 
-        this.linkHref = new CQ.Ext.form.TextField({
-            cls:"customwidget-3",
-            listeners: {
-                change: {
-                    scope:this,
-                    fn:this.updateHidden
-                }
-            }
-        });
-        this.add(new CQ.Ext.form.Label({
-            cls:"customwidget-label",
-            text: "URL"}));
-        this.add(this.linkHref);
- 
-        //Link HREF ends
- 
-    },
- 
-    // overriding CQ.form.CompositeField#processPath
-    processPath: function(path) {
-        console.log("CustomWidget#processPath", path);
-        this.linkType.processPath(path);
-        this.linkType.processPath(path);
-    },
- 
-    // overriding CQ.form.CompositeField#processRecord
-    processRecord: function(record, path) {
-        console.log("CustomWidget#processRecord", path, record);
-        this.linkType.processRecord(record, path);
-        this.linkType.processRecord(record, path);
-    },
- 
-    // overriding CQ.form.CompositeField#setValue
-    setValue: function(value) {
-        var parts = value.split("\\");
-        //this.linkType.setValue(parts[0]);
-        this.linkType.setValue(parts[0]);
-        this.linkText.setValue(parts[1]);
-        this.linkHref.setValue(parts[2]);
-        this.hiddenField.setValue(value);
- 
-    },
- 
-    // overriding CQ.form.CompositeField#getValue
-    getValue: function() {
-        this.getRawValue();
-        return this.getRawValue();
-    },
- 
-    // overriding CQ.form.CompositeField#getRawValue
-    getRawValue: function() {
-       return this.linkType.getValue() + "\\" +
-               this.linkText.getValue() + "\\" +
-               this.linkHref.getValue();
-    },
- 
-    // private
-    updateHidden: function() {
-        //alert('customwidget updatehidden');
- 
-    var val1 = this.linkType.getValue(); 
-        this.linkText.setValue(val1);
- 
-         
-    }
- 
- 
- 
+CQ.Ext.form.Contact = CQ.Ext.extend(CQ.Ext.form.TriggerField, {
+
+	linkDialog : null,
+
+	"triggerClass" : "x-form-search-trigger",
+
+	"separator" : "#@",
+
+	"readOnly" : false,
+	
+	constructor : function(config) {
+
+		this.editorKernel = new CQ.form.rte.IFrameKernel(config);
+		CQ.Ext.form.Contact.superclass.constructor.call(this, config);
+	},
+	
+	initComponent : function() {
+		CQ.Ext.form.Contact.superclass.initComponent.call(this);
+	},
+
+	// private
+	onDestroy : function() {
+		// CQ.Ext.destroy(this.menu, this.keyNav);
+		if (this.linkDialog) {
+			this.linkDialog.destroy();
+		}
+		CQ.Ext.form.Contact.superclass.onDestroy.call(this);
+	},
+
+	/**
+	 * @method onTriggerClick
+	 * @hide
+	 */
+	// private
+	// Implements the default empty TriggerField.onTriggerClick
+	// function to display the Meta Link Dialog
+	onTriggerClick : function() {
+		
+		fieldName = this.getName();
+		
+		var deptname = fieldName + "_deptname";
+		var deptContact = fieldName + "_deptContact";
+		var deptEmail = fieldName + "_deptEmail";
+		
+
+		var deptnameValue;
+		var deptContactValue;
+		var deptEmailValue;
+		
+
+		var fieldValues = this.getValue();
+		var elem = fieldValues.split(this.separator);
+
+		deptnameValue = elem[0];
+		deptContactValue = elem[1];
+		deptEmailValue = elem[2];
+		
+
+		// lazy creation of browse dialog
+		if (this.linkDialog == null) {
+			function okHandler() {
+				prefix = this.linkfield.getName();
+				
+				var deptname = prefix + "_deptname";
+				var deptContact = prefix + "_deptContact";
+				var deptEmail = prefix + "_deptEmail";
+				
+				deptnameValue = this.getField(deptname).getValue();
+				deptContactValue = this.getField(deptContact).getValue();
+				deptEmailValue = this.getField(deptEmail).getValue();
+				
+								
+				this.linkfield.setValue(deptnameValue + this.linkfield.separator
+						+ deptContactValue + this.linkfield.separator
+						+ deptEmailValue);
+				
+				this.hide();
+			}
+
+			var linkDialogCfg = {
+
+				"ok" : okHandler,
+				"id" : CQ.Util.createId("cq-linkdialog"),
+				"title" : "Share Item",
+				"height" : 400,
+				"width" : 435,
+				"xtype" : "dialog",
+				"linkfield" : this,
+
+				"items" : {
+					"xtype" : "panel",
+					"items" : [
+							{
+								"xtype" : "textfield",
+								"fieldLabel" : "Dept Name:",
+								"fieldDescription" : "Risk Management Compliance",
+								"name" : deptname,
+								"value" : deptnameValue
+							},
+							{
+								"xtype" : "textfield",
+								"fieldLabel" : "Dept Contact:",
+								"fieldDescription" : "(65) 248 2888",
+								"name" : deptContact,
+								"value" : deptContactValue
+							},
+							{
+								"xtype" : "textfield",
+								"fieldLabel" : "Dept Email:",
+								"fieldDescription" : "Wecare-SG@greateasternlife.com",
+								"name" : deptEmail,
+								"value" : deptEmailValue
+							}
+					]
+				}
+			};
+
+			linkDialogCfg.buttons = CQ.Dialog.OKCANCEL;
+			this.linkDialog = new CQ.Dialog(linkDialogCfg);
+
+		} else {
+			// TODO put value
+		}
+
+		this.linkDialog.show();
+	}
+
 });
- 
-// register xtype
-CQ.Ext.reg("ejstdate", Ejst.CustomWidget);
- 
-//------------------------------------------------------------------------------
- 
-Ejst.x3 = {};
- 
-Ejst.x3.provideOptions = function(path, record) {
-    // do something with the path or record
-    return [{
-        text:"Button22",
-        value:"button"
-    },{
-        text:"Link",
-        value:"link"
-    }];
-};
+CQ.Ext.reg('contactfield', CQ.Ext.form.Contact);

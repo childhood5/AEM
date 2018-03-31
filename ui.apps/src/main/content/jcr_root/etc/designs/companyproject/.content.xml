@@ -5,12 +5,19 @@
         jcr:primaryType="nt:unstructured"
         jcr:title="Company Project Site Design"
         sling:resourceType="wcm/core/components/designer">
-        <page jcr:primaryType="nt:unstructured">
+       <activitiespage jcr:primaryType="nt:unstructured">
             <par
                 jcr:primaryType="nt:unstructured"
-                sling:resourceType="wcm/foundation/components/parsys"
-                components="[/apps/companyproject/components/content/definition-list,/apps/companyproject/components/content/image_text,/apps/companyproject/components/content/image_component,/apps/companyproject/components/content/activitie_component,/apps/companyproject/components/content/mpg_component]">
+                components="[/apps/companyproject/components/content/activitie_component,/apps/companyproject/components/content/mpg_component]"
+                sling:resourceType="wcm/foundation/components/parsys">
             </par>
-        </page>
+        </activitiespage>
+        <activitiesdetailspage jcr:primaryType="nt:unstructured">
+            <par
+                jcr:primaryType="nt:unstructured"
+                components="[/apps/companyproject/components/content/image_text,/apps/companyproject/components/content/image_component]"
+                sling:resourceType="wcm/foundation/components/parsys">
+            </par>
+        </activitiesdetailspage>
     </jcr:content>
 </jcr:root>
