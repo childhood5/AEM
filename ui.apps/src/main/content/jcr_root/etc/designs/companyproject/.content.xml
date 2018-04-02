@@ -8,7 +8,7 @@
        <activitiespage jcr:primaryType="nt:unstructured">
             <par
                 jcr:primaryType="nt:unstructured"
-                components="[/apps/companyproject/components/content/activitie_component,/apps/companyproject/components/content/mpg_component]"
+                components="[/apps/companyproject/components/content/activitie_component,/apps/companyproject/components/content/mpg_component,/apps/companyproject/components/content/star]"
                 sling:resourceType="wcm/foundation/components/parsys">
             </par>
         </activitiespage>

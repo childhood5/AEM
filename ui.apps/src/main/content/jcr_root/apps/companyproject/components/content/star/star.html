@@ -1,5 +1,6 @@
-<div class="bandeau-mpg margin-bottom-small" data-sly-use.starItems="com.adobe.trainning.core.core.component.StarComponent">
-	<div data-sly-list="${starItems.stars}">
-		<img alt="image" src="${item.key}">
-     </div>
-</div>
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Star component
+</sly>
+
+<span class="sparkle margin-bottom-xxs"></span>
+<center>${properties.style}</center>

@@ -1,6 +1,9 @@
-MPG:
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	MPG component
+</sly>
+
 <div class="bandeau-mpg margin-bottom-small">
 	<h3 class="title-3-ter">${properties.title}</h3>
 	<p class="text">${properties.text @context='html'}</p>
-	<div class="parsys12" data-sly-resource="${'par1' @ resourceType='/apps/companyproject/components/content/ctawidget_component'}"></div>
+	<sly class="parsys" data-sly-resource="${'par' @ resourceType='/apps/companyproject/components/content/ctawidget_component'}"></sly>
 </div>

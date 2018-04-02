@@ -1,12 +1,13 @@
 
-<div data-sly-test="${properties.openNewTab}">
+<sly data-sly-test="${properties.openNewTab}">
 	<a target="_blank"  href="${properties.link}.html" class="cta lucien-regular color-brown">
 		${properties.label} <i class="icon icon-arrow"></i>
 	</a>
-</div>
+</sly>
 
-<div data-sly-test="${!properties.openNewTab}">
+<sly data-sly-test="${!properties.openNewTab}">
 	<a  href="#" class="cta lucien-regular color-brown">
 		${properties.label} <i class="icon icon-arrow"></i>
 	</a>
-</div>
+</sly>
+<sly class="parsys" data-sly-resource="${'par' @ resourceType='/apps/companyproject/components/content/star'}"></sly>

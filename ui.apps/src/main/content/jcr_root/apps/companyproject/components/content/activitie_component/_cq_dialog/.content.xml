@@ -30,7 +30,7 @@
                             panel-eaem-nested="">
 							<datasource
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="/apps/companyproject/components/datasource/mylist/mylist.html"/>
+                                sling:resourceType="/apps/companyproject/components/datasource/pageslist/pageslist.html"/>
                         </field>
                     </childPages>
                 </items>

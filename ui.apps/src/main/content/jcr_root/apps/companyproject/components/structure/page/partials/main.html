@@ -983,7 +983,10 @@
 	</div>
 	<div class="main-container m58 hotel-color">
 		<sly data-sly-include="/apps/companyproject/components/content/breadcrumb/breadcrumb.html" data-sly-unwrap/>
-	    <div class="page__par" data-sly-resource="par"></div>
+	    <div id="js_ajax_injection">
+	    	<sly class="page__par" data-sly-resource="par" data-sly-unwrap/>
+	    	<sly class="parsys" data-sly-resource="${'par1' @ resourceType='/apps/companyproject/components/content/mpg_component'}"></sly>
+	    </div>
 	</div>
 	<footer>
 		<img  alt="footer" src="/etc/designs/companyproject/clientlib-all/img/data/footer.png" style="height: auto; width:100%;">
