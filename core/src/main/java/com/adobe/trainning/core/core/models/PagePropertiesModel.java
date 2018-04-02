@@ -1,6 +1,6 @@
 package com.adobe.trainning.core.core.models;
 
-public class HeroTextBean {
+public class PagePropertiesModel {
     
     private String icon;
          
@@ -61,5 +61,4 @@ public class HeroTextBean {
 	public void setPagePath(String pagePath) {
 		this.pagePath = pagePath;
 	}
-     
 }
