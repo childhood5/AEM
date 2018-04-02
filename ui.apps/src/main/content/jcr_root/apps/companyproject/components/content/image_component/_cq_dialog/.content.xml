@@ -39,7 +39,7 @@
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/form/textfield"
                                         fieldLabel="Text"
-                                        value="This is a title of image"
+                                        value="This is a title"
                                         name="./title"/>
                                 </items>
                             </column>

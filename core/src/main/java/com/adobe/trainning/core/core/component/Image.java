@@ -15,10 +15,14 @@ public class Image extends WCMUsePojo {
 	public void activate() throws Exception {
 		
 		 ValueMap valueMap = getResource().adaptTo(ValueMap.class);
-		 String imagePath = valueMap.get("image", "/content/dam/companyproject/baby.png");
-		 String imageTitle = valueMap.get("title", "This is a title of image");
-		 imageModel.setImagePath(imagePath);
-		 imageModel.setImageTitle(imageTitle);
+		 String path = valueMap.get("image", "/content/dam/companyproject/baby.png");
+		 String title = valueMap.get("title", "This is a title");
+		 String description = valueMap.get("description", "This is a description");
+		 String position = valueMap.get("position", "right");
+		 imageModel.setPath(path);
+		 imageModel.setTitle(title);
+		 imageModel.setDescription(description);
+		 imageModel.setPosition(position);
 	}
 	
 	public ImageModel getImageModel() {

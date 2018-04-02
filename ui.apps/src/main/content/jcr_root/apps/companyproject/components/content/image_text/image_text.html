@@ -1,33 +1,34 @@
-Image text
-<div class="module m39-1 m-popin-gallery">
-	<sly data-sly-test="${properties.position=='left'}">
-		<div class="block-desire inner-medium block-vam m-popin-gallery">
-			<div class="block-vam-col block-w1">
-				<div class="bloc-description">
-					<h2 class="title-name">${properties.title}</h2>
-					<p class="description">${properties.description}</p>
+<sly data-sly-use.imageObject="com.adobe.trainning.core.core.component.Image">
+	<div class="module m39-1 m-popin-gallery">
+		<sly data-sly-test="${imageObject.imageModel.position=='left'}">
+			<div class="block-desire inner-medium block-vam m-popin-gallery">
+				<div class="block-vam-col block-w1">
+					<div class="bloc-description">
+						<h2 class="title-name">${imageObject.imageModel.title}</h2>
+						<p class="description">${imageObject.imageModel.description}</p>
+					</div>
+				</div>
+				<div class="block-vam-col block-w2">
+					<div class="bloc-picture">
+						<img src="${imageObject.imageModel.path}" alt="${imageObject.imageModel.title}">
+					</div>
 				</div>
 			</div>
-			<div class="block-vam-col block-w2">
-				<div class="bloc-picture">
-					<img src="${properties.image}" alt="${properties.title}">
+		</sly>
+		<sly data-sly-test="${imageObject.imageModel.position=='right'}">
+			<div class="block-desire inner-medium block-vam">
+				<div class="block-vam-col block-w2 bloc-picture">
+					<div class="bloc-picture">
+						<img src="${imageObject.imageModel.path}" alt="${imageObject.imageModel.title}">
+					</div>
+				</div>
+				<div class="block-vam-col block-w1">
+					<div class="bloc-description">
+						<h2 class="title-name">${imageObject.imageModel.title}</h2>
+						<p class="description">${imageObject.imageModel.description}</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</sly>
-	<sly data-sly-test="${properties.position=='right'}">
-		<div class="block-desire inner-medium block-vam">
-			<div class="block-vam-col block-w2 bloc-picture">
-				<div class="bloc-picture">
-					<img src="${properties.image}" alt="${properties.title}">
-				</div>
-			</div>
-			<div class="block-vam-col block-w1">
-				<div class="bloc-description">
-					<h2 class="title-name">${properties.title}</h2>
-					<p class="description">${properties.description}</p>
-				</div>
-			</div>
-		</div>
-	</sly>
-</div>
+		</sly>
+	</div>
+</sly>

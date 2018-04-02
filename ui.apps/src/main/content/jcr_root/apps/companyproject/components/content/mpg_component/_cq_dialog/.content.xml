@@ -18,11 +18,13 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/form/textfield"
                         fieldLabel="Title"
+                        value="BEST PRICE GUARANTEE"
                         name="./title"/>
                     <text
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="cq/gui/components/authoring/dialog/richtext"
                         fieldLabel="Descritpion"
+                        value="Barrière Hotels guarantees guests the best prices on its website ! If you find a better price on another website, we will match it, along with a further 10% off."
                         name="./text"
                         useFixedInlineToolbar="{Boolean}true">
                         <rtePlugins jcr:primaryType="nt:unstructured">

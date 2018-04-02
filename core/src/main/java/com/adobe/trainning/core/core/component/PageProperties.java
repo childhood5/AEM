@@ -16,8 +16,8 @@ import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.Page;
 
 
-public class PageProperties extends WCMUsePojo
-{
+public class PageProperties extends WCMUsePojo {
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActivitiesChildPage.class);
 	
     private PagePropertiesModel pagePropertiesModel = new PagePropertiesModel();
@@ -38,11 +38,11 @@ public class PageProperties extends WCMUsePojo
         	
     		String pagePath = getProperties().get("childnode", "") ;
     		Node node = getRequest().getResourceResolver().getResource(pagePath + "/" + JcrConstants.JCR_CONTENT).adaptTo(Node.class);
-    		pagePropertiesModel.setIcon(node.getProperty("iconCustome").getString());
-    		pagePropertiesModel.setName(node.getProperty("nameCustome").getString());
-    		pagePropertiesModel.setTitle(node.getProperty("titleCustome").getString());
-    		pagePropertiesModel.setDescription(node.getProperty("descriptionCustome").getString());
-    		pagePropertiesModel.setImage(node.getProperty("imageCustome").getString());
+    		pagePropertiesModel.setIcon(node.getProperty("iconActivity").getString());
+    		pagePropertiesModel.setName(node.getProperty("nameActivity").getString());
+    		pagePropertiesModel.setTitle(node.getProperty("titleActivity").getString());
+    		pagePropertiesModel.setDescription(node.getProperty("descriptionActivity").getString());
+    		pagePropertiesModel.setImage(node.getProperty("imageActivity").getString());
     		pagePropertiesModel.setPagePath(pagePath);
     		
 		} catch (Exception e) {

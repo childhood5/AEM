@@ -7,9 +7,9 @@
        <items
          jcr:primaryType="nt:unstructured"
          sling:hideChildren="permissions">
-         <custom
+         <activity
              jcr:primaryType="nt:unstructured"
-             jcr:title="Custom"
+             jcr:title="Activity"
              sling:orderBefore="basic"
              sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
              <items jcr:primaryType="nt:unstructured">
@@ -17,7 +17,7 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/container">
                <items jcr:primaryType="nt:unstructured">
-               	  <iconCustome
+               	  <iconActivity
                       jcr:primaryType="nt:unstructured"
                       sling:resourceType="granite/ui/components/foundation/form/select"
                       class="cq-dialog-select-media"
@@ -25,53 +25,53 @@
                       fieldLabel="Icon"
                       id="mediaId"
                       multiple="{Boolean}false"
-                      name="./iconCustome">
+                      name="./iconActivity">
                       <items jcr:primaryType="nt:unstructured">
                           <activity_horseRiding
                               jcr:primaryType="nt:unstructured"
                               text="Activity_HorseRiding"
-                              value="icon-Activity_HorseRiding"/>
+                              value="Activity_HorseRiding"/>
                           <golf
                               jcr:primaryType="nt:unstructured"
                               text="Golf"
-                              value="icon-Golf"/>
+                              value="Golf"/>
                           <activity_activityChildren
                               jcr:primaryType="nt:unstructured"
                               text="Activity_ActivityChildren"
-                              value="icon-Activity_ActivityChildren"/>
+                              value="Activity_ActivityChildren"/>
                           <cure
                               jcr:primaryType="nt:unstructured"
                               text="Cure"
-                              value="icon-Cure"/>
+                              value="Cure"/>
                           <casino
                               jcr:primaryType="nt:unstructured"
                               text="Casino"
-                              value="icon-Casino"/>
+                              value="Casino"/>
                           <gastronomy
                               jcr:primaryType="nt:unstructured"
                               text="Gastronomy"
-                              value="icon-Gastronomy"/>
+                              value="Gastronomy"/>
                       </items>
-                  </iconCustome>
-                  <nameCustome
+                  </iconActivity>
+                  <nameActivity
 	                  cq:showOnCreate="{Boolean}true"
 	                  jcr:primaryType="nt:unstructured"
 	                  sling:orderBefore="tags"
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
 	                  fieldLabel="Name"
 	                  required="{Boolean}true"
-	                  name="./nameCustome"
+	                  name="./nameActivity"
 	                  renderReadOnly="{Boolean}true"/>
-                  <titleCustome
+                  <titleActivity
 	                  cq:showOnCreate="{Boolean}true"
 	                  jcr:primaryType="nt:unstructured"
 	                  sling:orderBefore="tags"
 	                  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
 	                  fieldLabel="Title"
 	                  required="{Boolean}true"
-	                  name="./titleCustome"
+	                  name="./titleActivity"
 	                  renderReadOnly="{Boolean}true"/>
-	              <descriptionCustome
+	              <descriptionActivity
 	                  cq:showOnCreate="{Boolean}true"
 	                  jcr:primaryType="nt:unstructured"
 	                  sling:orderBefore="tags"
@@ -79,19 +79,19 @@
 	                  fieldLabel="Description"
 	                  maxlength="{Long}150"
 	                  required="{Boolean}true"
-	                  name="./descriptionCustome"
+	                  name="./descriptionActivity"
 	                  renderReadOnly="{Boolean}true"/>
-	              <imageCustome
+	              <imageActivity
                       jcr:primaryType="nt:unstructured"
                       sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
                       fieldDescription="558x 04 px or 368x134 px"
                       fieldLabel="Image"
-                      name="./imageCustome"
+                      name="./imageActivity"
                       rootPath="/content/dam"/>
                 </items>
               </column>
              </items>
-             </custom>
+             </activity>
             </items>
   </tabs>
   </items>
