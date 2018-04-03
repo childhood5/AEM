@@ -8,14 +8,14 @@
        <activitiespage jcr:primaryType="nt:unstructured">
             <par
                 jcr:primaryType="nt:unstructured"
-                components="[/apps/companyproject/components/content/activities_component,/apps/companyproject/components/content/mpg_component,/apps/companyproject/components/content/star]"
+                components="[/apps/companyproject/components/content/activities_component,/apps/companyproject/components/content/star_component,/apps/companyproject/components/content/mpg_component]"
                 sling:resourceType="wcm/foundation/components/parsys">
             </par>
         </activitiespage>
         <activitiesdetailspage jcr:primaryType="nt:unstructured">
             <par
                 jcr:primaryType="nt:unstructured"
-                components="[/apps/companyproject/components/content/image_text,/apps/companyproject/components/content/image_component]"
+                components="[/apps/companyproject/components/content/image_component,/apps/companyproject/components/content/image_text_component,/apps/companyproject/components/content/mpg_component]"
                 sling:resourceType="wcm/foundation/components/parsys">
             </par>
         </activitiesdetailspage>

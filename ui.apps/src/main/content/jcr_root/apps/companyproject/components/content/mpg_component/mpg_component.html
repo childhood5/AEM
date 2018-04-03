@@ -1,10 +1,11 @@
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
 	MPG component
 </sly>
-<sly data-sly-use.object="com.adobe.trainning.core.core.component.MPG">
+
+<sly data-sly-use.mpg="com.adobe.trainning.core.core.component.MPG">
 	<div class="bandeau-mpg margin-bottom-small">
-		<h3 class="title-3-ter">${object.imagegModel.title}</h3>
-		<p class="text">${object.imagegModel.text @context='html'}</p>
-		<sly class="parsys" data-sly-resource="${'widget_component' @ resourceType='/apps/companyproject/components/content/ctawidget_component'}"></sly>
+		<h3 class="title-3-ter">${mpg.mPGModel.title}</h3>
+		<div class="text">${mpg.mPGModel.text @context='html'}</div>
+		<sly class="parsys" data-sly-resource="${'widget' @ resourceType='/apps/companyproject/components/content/widget'}"></sly>
 	</div>
 </sly>

@@ -36,7 +36,8 @@ public class ActivitiesChildPage extends WCMUsePojo {
 			Resource res = resolver.getResource(suffix);
 			PageManager pageManager = resolver.adaptTo(PageManager.class);
 			Page currentPage = pageManager.getContainingPage(res);
-
+			
+			// Get child page list
 			List<Page> pages = PageUtil.getAllChildPages(currentPage);
 			for (Page page : pages) {
 				childPages.put(page.getPath(), page.getPath());

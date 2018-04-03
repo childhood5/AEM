@@ -13,7 +13,6 @@ public class Image extends WCMUsePojo {
 	
 	@Override
 	public void activate() throws Exception {
-		
 		 ValueMap valueMap = getResource().adaptTo(ValueMap.class);
 		 String path = valueMap.get("image", "/content/dam/companyproject/baby.png");
 		 String title = valueMap.get("title", "This is a title");
